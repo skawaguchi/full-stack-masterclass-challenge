@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import App from './App';
 
+import AppHeader from './AppHeader';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
 import NotFound from './NotFound';
@@ -27,6 +28,12 @@ describe('<App/>', () => {
     it('should have a container element', () => {
         expect(component.type()).toEqual('main');
         expect(component.hasClass('app')).toBe(true);
+    });
+
+    it('should have a header', () => {
+        const header = component.find(AppHeader);
+
+        expect(header).toHaveLength(1);
     });
 
     describe('Routes', () => {
