@@ -33,6 +33,14 @@ describe('<AppHeader/>', () => {
         expect(component.type()).toEqual('header');
     });
 
+    it('should have the company logo', () => {
+        const logo = component.find('img');
+
+        expect(logo.props().src).toEqual('/beaus-black-logo.svg');
+        expect(logo.hasClass('logo')).toBe(true);
+        expect(logo.props().alt).toEqual('Beau\'s Logo');
+    });
+
     it('should have a main nav', () => {
         const nav = component.find(MainNav);
 

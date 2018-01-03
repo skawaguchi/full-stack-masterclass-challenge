@@ -1,0 +1,9 @@
+.main-nav {
+    margin-top: 10px;
+}
+
+.main-nav a {
+    color: #000;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 1.2rem;
+}

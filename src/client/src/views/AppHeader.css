@@ -1,0 +1,13 @@
+.app-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    fill: #FAF7E8;
+    max-width: 300px;
+}
+
+.logo svg path {
+    fill: #FAF7E8;
+}

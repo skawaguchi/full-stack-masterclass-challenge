@@ -31,7 +31,7 @@ describe('<MainNav/>', () => {
 
         expect(link.type()).toEqual(Link);
         expect(link.props().to).toEqual('/');
-        expect(link.childAt(0).text()).toEqual('Home');
+        expect(link.childAt(0).text()).toEqual('Seasonal Beverages');
     });
 });
 

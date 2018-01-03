@@ -2,10 +2,12 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
+import './MainNav.css';
+
 function MainNav() {
     return (
         <nav className="main-nav">
-            <Link to='/'>{'Home'}</Link>
+            <Link to='/'>{'Seasonal Beverages'}</Link>
         </nav>
     );
 }
