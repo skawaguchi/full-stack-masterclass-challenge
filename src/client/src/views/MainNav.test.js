@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Link } from 'react-router-dom';
 
 import MainNav from './MainNav';
 
-import { Link } from 'react-router-dom';
 
 describe('<MainNav/>', () => {
     let component;
