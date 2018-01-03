@@ -1,0 +1,11 @@
+{
+    "name": "full-stack-masterclass-challenge",
+    "version": "1.0.0",
+    "engines": {
+        "node": ">=8.9.3 <9"
+    },
+    "repository": "https://github.com/skawaguchi/full-stack-masterclass-challenge.git",
+    "author": "Stephen Kawaguchi <stephen.kawaguchi@gmail.com>",
+    "license": "MIT",
+    "private": true
+}
