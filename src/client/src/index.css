@@ -1,8 +1,8 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
 }
 
 h1,
@@ -11,6 +11,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Abril Fatface', cursive;
-  font-size: 2rem;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 2rem;
 }
