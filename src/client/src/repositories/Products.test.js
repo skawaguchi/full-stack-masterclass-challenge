@@ -7,7 +7,7 @@ import { getProduct } from '../mockUtils';
 
 const sandbox = sinon.sandbox.create();
 
-describe('Products respository', () => {
+describe('Products repository', () => {
     let getStub;
 
     beforeEach(() => {
@@ -20,10 +20,17 @@ describe('Products respository', () => {
 
     it('should call the list of products', () => {
         const repoUrl = 'http://lcboapi.com/products';
-        const params = {
-            q: 'beau\'s',
-            where: 'is_seasonal',
-            where_not: 'is_dead'
+        const expectedKey = 'MDphYzU1NTBmZS1mMGMwLTExZTctYmI3ZS1kNzRiYjJiYWFjNzQ6eUVObmVRdnVCYmNLeFBPR0JWOFpqdjh5bDdmTkk2eUVzcmZ1';
+        const expectedOptions = {
+            headers: {
+                Authorization: `token ${expectedKey}`
+            },
+            params: {
+                per_page: 100,
+                q: 'beaus',
+                where: 'is_seasonal',
+                where_not: 'is_dead'
+            }
         };
 
         const responseMockData = [
@@ -35,6 +42,6 @@ describe('Products respository', () => {
         productsRepo.getProducts();
 
         sinon.assert.calledOnce(getStub);
-        sinon.assert.calledWithExactly(getStub, repoUrl, params);
+        sinon.assert.calledWithExactly(getStub, repoUrl, expectedOptions);
     });
 });
