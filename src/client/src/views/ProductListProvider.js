@@ -6,7 +6,7 @@ import { Stores } from '../stores/index';
 
 function RouterProvider(props) {
     return (
-        <Provider productList={ Stores.productList }>
+        <Provider productListStore={ Stores.productListStore }>
             { props.children }
         </Provider>
     );

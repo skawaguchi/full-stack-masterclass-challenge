@@ -1,5 +1,5 @@
-import { ProductListStore } from './ProductListStore';
+import ProductListStore from './ProductListStore';
 
 export const Stores = {
-    productList: ProductListStore
+    productListStore: new ProductListStore()
 };

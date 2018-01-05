@@ -1,8 +1,12 @@
-import { action, computed, observable } from 'mobx';
+import {
+    action,
+    computed,
+    observable
+} from 'mobx';
 
 import { getProducts } from '../repositories/Products';
 
-export class ProductListStore {
+class ProductListStore {
     @observable productList = [];
 
     @computed get displayedProductList() {
@@ -35,3 +39,5 @@ export class ProductListStore {
         }
     }
 }
+
+export default ProductListStore;

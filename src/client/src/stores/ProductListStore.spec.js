@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { ProductListStore } from './ProductListStore';
+import ProductListStore from './ProductListStore';
 
 import { getProduct } from '../mockUtils';
 import * as productRepository from '../repositories/Products';
