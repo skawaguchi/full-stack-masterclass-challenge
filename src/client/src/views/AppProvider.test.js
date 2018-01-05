@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
 
 import AppProvider from './AppProvider';
+import ProductListProvider from './ProductListProvider';
 
 import App from './App';
 
@@ -26,8 +27,16 @@ describe('<AppProvider/>', () => {
         expect(component.type()).toEqual(BrowserRouter);
     });
 
-    it('should have the application as its children', () => {
-        expect(component.childAt(0).type()).toEqual(App);
+    it('should have a provider for the product list', () => {
+        const provider = component.find(ProductListProvider);
+
+        expect(provider).toHaveLength(1);
+    });
+
+    it('should have the application component', () => {
+        const app = component.find(App);
+
+        expect(app).toHaveLength(1);
     });
 });
 

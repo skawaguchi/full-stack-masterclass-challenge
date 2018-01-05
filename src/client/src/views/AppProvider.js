@@ -3,10 +3,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
+import ProductListProvider from './ProductListProvider';
+
 function RouterProvider() {
     return (
         <BrowserRouter>
-            <App/>
+            <ProductListProvider>
+                <App/>
+            </ProductListProvider>
         </BrowserRouter>
     );
 }
