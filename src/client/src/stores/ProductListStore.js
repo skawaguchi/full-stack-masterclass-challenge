@@ -1,7 +1,9 @@
 import { action, computed, observable } from 'mobx';
 
+import { getProducts } from '../repositories/Products';
+
 export class ProductListStore {
-    productList = [];
+    @observable productList = [];
 
     @computed get displayedProductList() {
         return this.productList.map(({
@@ -9,17 +11,27 @@ export class ProductListStore {
             image_thumb_url,
             name,
             product_number
-        }) => {
-            return {
+        }) =>
+            ({
                 id,
                 image_thumb_url,
                 name,
                 product_number
-            };
-        });
+            })
+        );
     }
 
     @action setProducts(newProducts) {
         this.productList = newProducts;
+    }
+
+    @action async fetchProducts() {
+        try {
+            const products = await getProducts();
+
+            this.setProducts(products);
+        } catch (err) {
+            throw new Error(err);
+        }
     }
 }

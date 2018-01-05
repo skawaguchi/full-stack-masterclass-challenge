@@ -1,8 +1,11 @@
+import sinon from 'sinon';
+
 import { ProductListStore } from './ProductListStore';
 
-import {
-    getProduct
-} from '../mockUtils';
+import { getProduct } from '../mockUtils';
+import * as productRepository from '../repositories/Products';
+
+const sandbox = sinon.sandbox.create();
 
 describe('ProductListStore', () => {
     let store;
@@ -15,6 +18,10 @@ describe('ProductListStore', () => {
         makeStore();
     });
 
+    afterEach(() => {
+        sandbox.restore();
+    });
+
     describe('Initialization', () => {
         it('should default the product list to empty', () => {
             expect(store.productList).toHaveLength(0);
@@ -23,8 +30,11 @@ describe('ProductListStore', () => {
 
     describe('Methods', () => {
         let productListMockData;
+        let getProductsStub;
 
         beforeEach(() => {
+            getProductsStub = sandbox.stub(productRepository, 'getProducts');
+
             productListMockData = [
                 getProduct(),
                 getProduct(),
@@ -34,7 +44,7 @@ describe('ProductListStore', () => {
             store.setProducts(productListMockData);
         });
 
-        it('should get the displayed product list item', () => {
+        it('should get the adapted product list items for display', () => {
             const displayedList = store.displayedProductList;
             const expectedAttributes = [
                 'id',
@@ -64,6 +74,44 @@ describe('ProductListStore', () => {
 
         it('should set the product list', () => {
             expect(store.productList).toHaveLength(productListMockData.length);
+        });
+
+        it('should fetch the products', () => {
+            store.fetchProducts();
+
+            sinon.assert.calledOnce(getProductsStub);
+        });
+
+        describe('When fetching the products is successful', () => {
+            it('should update the store with the fetched products', async () => {
+                const expectedResults = [
+                    getProduct()
+                ];
+
+                getProductsStub
+                    .returns(Promise.resolve(expectedResults));
+
+                await store.fetchProducts();
+
+                expect(store.displayedProductList).toHaveLength(expectedResults.length);
+            });
+        });
+
+        describe('When fetching the products fails', () => {
+            it('should throw an error', async () => {
+                expect.assertions(1);
+
+                const expectedError = 'some error';
+
+                getProductsStub
+                    .returns(Promise.reject(expectedError));
+
+                try {
+                    await store.fetchProducts();
+                } catch (err) {
+                    expect(err).toEqual(new Error(expectedError));
+                }
+            });
         });
     });
 });
