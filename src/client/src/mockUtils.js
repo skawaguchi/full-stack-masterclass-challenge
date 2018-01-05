@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import Chance from 'chance';
 
 const chance = new Chance();
@@ -21,4 +22,16 @@ export function getProduct() {
         tertiary_category: chance.word(),
         varietal: chance.word()
     };
+}
+
+class MockReactClass extends Component {
+    render() {
+        return (
+            <div/>
+        );
+    }
+}
+
+export function getMockReactClass() {
+    return MockReactClass;
 }

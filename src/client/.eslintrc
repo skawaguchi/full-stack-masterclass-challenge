@@ -1,5 +1,6 @@
 {
     "env": {
+        "browser": true,
         "jest/globals": true
     },
     "extends": [
@@ -9,6 +10,7 @@
     "globals": {
         "window": true
     },
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
