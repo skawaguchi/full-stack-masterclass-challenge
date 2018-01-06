@@ -63,17 +63,27 @@
     },
     "scripts": {
         "build": "node scripts/build.js",
+        "coverage": "node scripts/test.js --env=jsdom --coverage",
         "eslint": "npx eslint ./{src,__tests__}/**/*.js --cache",
         "lint": "yarn eslint && yarn stylelint",
         "start": "node scripts/start.js",
         "stylelint": "npx stylelint 'src/**/*.css'",
         "test": "node scripts/test.js --env=jsdom",
-        "verify": "yarn lint && yarn test"
+        "verify": "yarn lint && yarn coverage"
     },
     "jest": {
         "collectCoverageFrom": [
-            "src/**/*.{js,jsx,mjs}"
+            "src/**/*.{js,jsx,mjs}",
+            "!src/{mockUtils,index,registerServiceWorker}.{js,jsx,mjs}"
         ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 100,
+                "functions": 100,
+                "lines": 100,
+                "statements": 100
+            }
+        },
         "setupFiles": [
             "<rootDir>/config/polyfills.js"
         ],
