@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/fontawesome-free-solid'
+import { faTimes } from '@fortawesome/fontawesome-free-solid';
 
 import CloseLink from './CloseLink';
 
