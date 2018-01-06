@@ -1,0 +1,20 @@
+.close-link {
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 40px;
+}
+
+.close-link svg.svg-inline--fa.fa-w-12 {
+    height: 40px;
+    width: 40px;
+}
+
+.close-link svg path {
+    fill: #000000;
+}
+
+.close-link:hover svg path {
+    fill: #666666;
+}
