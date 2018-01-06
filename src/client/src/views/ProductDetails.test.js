@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import ProductDetails from './ProductDetails';
 
+import AppContainer from './AppContainer';
 import CloseLink from '../components/CloseLink';
 
 describe('<ProductDetails/>', () => {
@@ -21,9 +22,15 @@ describe('<ProductDetails/>', () => {
         renderComponent();
     });
 
+    it('should ensure the products are loaded', () => {
+        expect(component.type()).toEqual(AppContainer);
+    });
+
     it('should have a container element', () => {
-        expect(component.type()).toEqual('section');
-        expect(component.hasClass('product-details')).toBe(true);
+        const container = component.childAt(0);
+
+        expect(container.type()).toEqual('section');
+        expect(container.hasClass('product-details')).toBe(true);
     });
 
     it('should have a close link', () => {

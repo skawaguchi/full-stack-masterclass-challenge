@@ -1,82 +1,97 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Route, Switch } from 'react-router-dom';
+import { mount, shallow } from 'enzyme';
+import sinon from 'sinon';
+import { MemoryRouter } from 'react-router';
 
 import AppContainer from './AppContainer';
 
-import Home from './Home';
-import ProductDetails from './ProductDetails';
-import BeerFinder from './BeerFinder';
-import NotFound from './NotFound';
+import Loader from '../components/Loader';
+
+import { Stores } from '../stores/index';
+
+import { getMockReactClass } from '../mockUtils';
+
+const sandbox = sinon.sandbox.create();
 
 describe('<AppContainer/>', () => {
     let component;
-    let props;
+    let store;
+    let MockReactClass;
 
-    function renderComponent(overrides) {
-        props = Object.freeze({
-            ...overrides
-        });
-
-        component = shallow(
-            <AppContainer {...props}/>
+    function renderMountedComponent() {
+        component = mount(
+            <MemoryRouter>
+                <AppContainer productListStore={ store }>
+                    <MockReactClass/>
+                </AppContainer>
+            </MemoryRouter>
         );
     }
 
+    function renderWrappedComponent() {
+        component = shallow(
+            <AppContainer productListStore={ store }>
+                <MockReactClass/>
+            </AppContainer>
+        ).dive();
+    }
+
     beforeEach(() => {
-        renderComponent();
+        store = Stores.productListStore;
+
+        sandbox.stub(store, 'fetchProducts');
+
+        MockReactClass = getMockReactClass();
     });
 
-    it('should have a container element', () => {
-        expect(component.type()).toEqual('main');
-        expect(component.hasClass('app')).toBe(true);
+    afterEach(() => {
+        sandbox.restore();
     });
 
-    describe('Routes', () => {
-        let switchEl;
+    describe('Given the component renders', () => {
+        describe('and there are no products', () => {
+            it('should show the loader', () => {
+                store.productList = [];
 
-        beforeEach(() => {
-            switchEl = component.find(Switch);
+                renderWrappedComponent();
+
+                expect(component.type()).toEqual(Loader);
+            });
+        });
+        describe('and there are products', () => {
+            it('should render children', () => {
+                store.productList = [{}];
+
+                renderWrappedComponent();
+
+                expect(component.type()).toEqual(MockReactClass);
+            });
+        });
+    });
+
+    describe('Given the component is rendered with a store', () => {
+        describe('and there are no products', () => {
+            describe('when the component mounts', () => {
+                it('should load the product list', () => {
+                    store.productList = [];
+
+                    renderMountedComponent();
+
+                    sinon.assert.calledOnce(store.fetchProducts);
+                });
+            });
         });
 
-        it('should set the view based on the url', () => {
-            expect(switchEl).toHaveLength(1);
-            expect(switchEl.children().length).toBeGreaterThan(0);
-        });
+        describe('and there are products', () => {
+            describe('when the component mounts', () => {
+                it('should not load the product list', () => {
+                    store.productList = [{}];
 
-        it('should have a route exactly matching route for the home view', () => {
-            const homeRoute = switchEl.childAt(0);
+                    renderMountedComponent();
 
-            expect(homeRoute.type()).toEqual(Route);
-            expect(homeRoute.props().exact).toBeTruthy();
-            expect(homeRoute.props().path).toEqual('/');
-            expect(homeRoute.props().component).toEqual(Home);
-        });
-
-        it('should have a route exactly matching the product details view', () => {
-            const productDetailsRoute = switchEl.childAt(1);
-
-            expect(productDetailsRoute.type()).toEqual(Route);
-            expect(productDetailsRoute.props().path).toEqual('/product/:productId');
-            expect(productDetailsRoute.props().exact).toBeTruthy();
-            expect(productDetailsRoute.props().component).toEqual(ProductDetails);
-        });
-
-        it('should have a route exactly matching the beer finder view', () => {
-            const beerFinderRoute = switchEl.childAt(2);
-
-            expect(beerFinderRoute.type()).toEqual(Route);
-            expect(beerFinderRoute.props().exact).toBeTruthy();
-            expect(beerFinderRoute.props().path).toEqual('/product/:productId/beer-finder');
-            expect(beerFinderRoute.props().component).toEqual(BeerFinder);
-        });
-
-        it('should have a not matching route', () => {
-            const notMatchingRoute = switchEl.childAt(3);
-
-            expect(notMatchingRoute.type()).toEqual(Route);
-            expect(notMatchingRoute.props().path).toEqual('*');
-            expect(notMatchingRoute.props().component).toEqual(NotFound);
+                    sinon.assert.notCalled(store.fetchProducts);
+                });
+            });
         });
     });
 });

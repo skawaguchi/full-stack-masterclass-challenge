@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppProvider from './AppProvider';
 import ProductListProvider from './ProductListProvider';
 
-import AppContainer from './AppContainer';
+import App from './App';
 
 describe('<AppProvider/>', () => {
     let component;
@@ -34,7 +34,7 @@ describe('<AppProvider/>', () => {
     });
 
     it('should have the application component', () => {
-        const app = component.find(AppContainer);
+        const app = component.find(App);
 
         expect(app).toHaveLength(1);
     });

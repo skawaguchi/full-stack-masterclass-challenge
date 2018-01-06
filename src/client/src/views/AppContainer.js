@@ -1,41 +1,29 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import { inject, observer } from 'mobx-react';
 
-import Home from './Home';
-import ProductDetails from './ProductDetails';
-import BeerFinder from './BeerFinder';
-import NotFound from './NotFound';
+import Loader from '../components/Loader';
 
-import './AppContainer.css';
-
+@inject('productListStore')
+@observer
 class AppContainer extends Component {
+    componentDidMount() {
+        if (this.props.productListStore.productList.length === 0) {
+            this.props.productListStore.fetchProducts();
+        }
+    }
+
     render() {
+        const hasProducts = this.props.productListStore.productList.length > 0;
+
         return (
-            <main className="app">
-                <Switch>
-                    <Route
-                        component={ Home }
-                        exact
-                        path="/"
-                    />
-                    <Route
-                        component={ ProductDetails }
-                        exact
-                        path="/product/:productId"
-                    />
-                    <Route
-                        component={ BeerFinder }
-                        exact
-                        path="/product/:productId/beer-finder"
-                    />
-                    <Route
-                        component={ NotFound }
-                        path="*"
-                    />
-                </Switch>
-            </main>
+            hasProducts ? this.props.children : <Loader/>
         );
     }
 }
+
+AppContainer.propTypes = {
+    children: PropTypes.node.isRequired
+};
 
 export default AppContainer;

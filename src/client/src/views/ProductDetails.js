@@ -1,12 +1,15 @@
 import React from 'react';
 
+import AppContainer from './AppContainer';
 import CloseLink from '../components/CloseLink';
 
 function ProductDetails() {
     return (
-        <section className="product-details">
-            <CloseLink/>
-        </section>
+        <AppContainer>
+            <section className="product-details">
+                <CloseLink/>
+            </section>
+        </AppContainer>
     );
 }
 export default ProductDetails;
