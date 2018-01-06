@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import App from './App';
 
-import AppHeader from './AppHeader';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
 import BeerFinder from './BeerFinder';
@@ -19,7 +18,9 @@ describe('<App/>', () => {
             ...overrides
         });
 
-        component = shallow(<App {...props}/>);
+        component = shallow(
+            <App {...props}/>
+        );
     }
 
     beforeEach(() => {
@@ -29,12 +30,6 @@ describe('<App/>', () => {
     it('should have a container element', () => {
         expect(component.type()).toEqual('main');
         expect(component.hasClass('app')).toBe(true);
-    });
-
-    it('should have a header', () => {
-        const header = component.find(AppHeader);
-
-        expect(header).toHaveLength(1);
     });
 
     describe('Routes', () => {
@@ -49,7 +44,7 @@ describe('<App/>', () => {
             expect(switchEl.children().length).toBeGreaterThan(0);
         });
 
-        it('should have an exactly matching route for the home view', () => {
+        it('should have a route exactly matching route for the home view', () => {
             const homeRoute = switchEl.childAt(0);
 
             expect(homeRoute.type()).toEqual(Route);
@@ -58,7 +53,7 @@ describe('<App/>', () => {
             expect(homeRoute.props().component).toEqual(Home);
         });
 
-        it('should have a route for the product details view', () => {
+        it('should have a route exactly matching the product details view', () => {
             const productDetailsRoute = switchEl.childAt(1);
 
             expect(productDetailsRoute.type()).toEqual(Route);
@@ -67,7 +62,7 @@ describe('<App/>', () => {
             expect(productDetailsRoute.props().component).toEqual(ProductDetails);
         });
 
-        it('should have a route for the beer finder view', () => {
+        it('should have a route exactly matching the beer finder view', () => {
             const beerFinderRoute = switchEl.childAt(2);
 
             expect(beerFinderRoute.type()).toEqual(Route);

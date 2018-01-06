@@ -1,9 +1,11 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
+import { MemoryRouter } from 'react-router';
 
 import Home from './Home';
 
+import AppHeader from './AppHeader';
 import ProductList from './ProductList';
 
 import { Stores } from '../stores/index';
@@ -20,7 +22,9 @@ describe('<Home/>', () => {
         sandbox.stub(store, 'fetchProducts');
 
         component = mount(
-            <Home productListStore={ store }/>
+            <MemoryRouter>
+                <Home productListStore={ store }/>
+            </MemoryRouter>
         );
     }
 
@@ -46,6 +50,12 @@ describe('<Home/>', () => {
         it('should be a section', () => {
             expect(component.type()).toEqual('section');
             expect(component.hasClass('home')).toBe(true);
+        });
+
+        it('should have the header for the application', () => {
+            const header = component.find(AppHeader);
+
+            expect(header).toHaveLength(1);
         });
 
         it('should have the product list', () => {
