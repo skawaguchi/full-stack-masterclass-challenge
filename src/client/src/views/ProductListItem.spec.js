@@ -6,7 +6,7 @@ import ProductListItem from './ProductListItem';
 
 import ProductImage from '../components/ProductImage';
 
-describe('ProductListItem', () => {
+describe('<ProductListItem/>', () => {
     let component;
     let props;
 

@@ -6,7 +6,7 @@ import ProductListItem from './ProductListItem';
 
 import { getProductListItem } from '../mockUtils';
 
-describe('ProductList', () => {
+describe('<ProductList/>', () => {
     let component;
     let props;
 
