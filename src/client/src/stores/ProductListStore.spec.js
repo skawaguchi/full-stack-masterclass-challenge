@@ -48,9 +48,9 @@ describe('ProductListStore', () => {
             const displayedList = store.displayedProductList;
             const expectedAttributes = [
                 'id',
-                'image_thumb_url',
+                'imagePath',
                 'name',
-                'product_number'
+                'productNumber'
             ];
             const excludedAttributes = [
                 'description',

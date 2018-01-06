@@ -1,15 +1,17 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { Stores } from '../stores/index';
 import sinon from 'sinon';
 
 import Home from './Home';
+
+import ProductList from './ProductList';
+
+import { Stores } from '../stores/index';
 
 const sandbox = sinon.sandbox.create();
 
 describe('<Home/>', () => {
     let component;
-    let props;
     let store;
 
     function renderMountedComponent() {
@@ -22,17 +24,14 @@ describe('<Home/>', () => {
         );
     }
 
-    function renderWrappedComponent(overrides) {
-        props = Object.freeze({
-            ...overrides
-        });
+    function renderWrappedComponent() {
+        store = Stores.productListStore;
+
+        sandbox.stub(store, 'fetchProducts');
 
         component = shallow(
-            <Home.wrappedComponent/>,
-            {
-                disableLifecycleMethods: true
-            }
-        );
+            <Home productListStore={ store }/>
+        ).dive();
     }
 
     afterEach(() => {
@@ -47,6 +46,12 @@ describe('<Home/>', () => {
         it('should be a section', () => {
             expect(component.type()).toEqual('section');
             expect(component.hasClass('home')).toBe(true);
+        });
+
+        it('should have the product list', () => {
+            const list = component.find(ProductList);
+
+            expect(list.props().productListItems).toEqual(store.displayedProductList);
         });
     });
 

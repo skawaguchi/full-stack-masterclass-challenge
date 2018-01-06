@@ -18,9 +18,9 @@ class ProductListStore {
         }) =>
             ({
                 id,
-                image_thumb_url,
+                imagePath: image_thumb_url,
                 name,
-                product_number
+                productNumber: product_number
             })
         );
     }

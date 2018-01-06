@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
-@inject('productListStore') class Home extends Component {
+import ProductList from './ProductList';
+
+@inject('productListStore')
+@observer
+class Home extends Component {
     componentDidMount() {
         this.props.productListStore.fetchProducts();
     }
@@ -10,6 +14,9 @@ import { inject } from 'mobx-react';
     render() {
         return (
             <section className="home">
+                <ProductList
+                    productListItems={this.props.productListStore.displayedProductList}
+                />
             </section>
         );
     }
@@ -17,7 +24,8 @@ import { inject } from 'mobx-react';
 
 Home.wrappedComponent.propTypes = {
     productListStore: PropTypes.shape({
-        fetchProducts: PropTypes.func.isRequired
+        fetchProducts: PropTypes.func.isRequired,
+        displayedProductList: PropTypes.arrayOf(PropTypes.object)
     })
 };
 

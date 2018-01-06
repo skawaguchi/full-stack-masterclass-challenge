@@ -25,17 +25,39 @@ export function getProduct(overrides) {
     };
 }
 
-export function getProductListItem(overrides) {
+export function getAdaptedProduct(overrides) {
     return {
+        description: null,
         id: chance.hash(),
-        image_url: chance.url({
+        imagePath: chance.url({
             extensions: ['png']
         }),
-        image_thumb_url: chance.url({
+        imageThumbPath: chance.url({
             extensions: ['png']
         }),
         name: chance.sentence(),
-        product_number: chance.hash(),
+        primaryCategory: chance.word(),
+        price: chance.natural(),
+        producerName: chance.hash(),
+        productNumber: chance.hash(),
+        secondaryCategory: chance.word(),
+        tertiaryCategory: chance.word(),
+        varietal: chance.word(),
+        ...overrides
+    };
+}
+
+export function getProductListItem(overrides) {
+    return {
+        id: chance.hash(),
+        imagePath: chance.url({
+            extensions: ['png']
+        }),
+        imageThumbPath: chance.url({
+            extensions: ['png']
+        }),
+        name: chance.sentence(),
+        productNumber: chance.hash(),
         ...overrides
     };
 }
