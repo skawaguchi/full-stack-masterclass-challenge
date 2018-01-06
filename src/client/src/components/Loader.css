@@ -1,0 +1,10 @@
+.loader {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.loader span {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 1.25rem;
+}
