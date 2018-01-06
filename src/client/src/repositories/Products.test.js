@@ -20,10 +20,11 @@ describe('Products repository', () => {
 
     it('should call the list of products', () => {
         const repoUrl = 'http://lcboapi.com/products';
-        const expectedKey = 'MDphYzU1NTBmZS1mMGMwLTExZTctYmI3ZS1kNzRiYjJiYWFjNzQ6eUVObmVRdnVCYmNLeFBPR0JWOFpqdjh5bDdmTkk2eUVzcmZ1';
+        const expectedKeyPart1 = 'MDphYzU1NTBmZS1mMGMwLTExZTctYmI3ZS1kNzRiYjJi';
+        const expectedKeyPart2 = 'YWFjNzQ6eUVObmVRdnVCYmNLeFBPR0JWOFpqdjh5bDdmTkk2eUVzcmZ1';
         const expectedOptions = {
             headers: {
-                Authorization: `token ${expectedKey}`
+                Authorization: `token ${expectedKeyPart1}${expectedKeyPart2}`
             },
             params: {
                 per_page: 100,

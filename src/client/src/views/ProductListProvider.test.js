@@ -1,13 +1,11 @@
 import React from 'react';
-import { mock, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
+import { Provider } from 'mobx-react';
 
 import ProductListProvider from './ProductListProvider';
 
-import { Provider } from 'mobx-react';
-
 import { Stores } from '../stores/index';
-
-import { getMockReactClass } from '../mockUtils'
+import { getMockReactClass } from '../mockUtils';
 
 describe('<ProductListProvider/>', () => {
     let component;
