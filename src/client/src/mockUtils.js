@@ -3,7 +3,7 @@ import Chance from 'chance';
 
 const chance = new Chance();
 
-export function getProduct() {
+export function getProduct(overrides) {
     return {
         description: null,
         id: chance.hash(),
@@ -20,7 +20,23 @@ export function getProduct() {
         product_number: chance.hash(),
         secondary_category: chance.word(),
         tertiary_category: chance.word(),
-        varietal: chance.word()
+        varietal: chance.word(),
+        ...overrides
+    };
+}
+
+export function getProductListItem(overrides) {
+    return {
+        id: chance.hash(),
+        image_url: chance.url({
+            extensions: ['png']
+        }),
+        image_thumb_url: chance.url({
+            extensions: ['png']
+        }),
+        name: chance.sentence(),
+        product_number: chance.hash(),
+        ...overrides
     };
 }
 
