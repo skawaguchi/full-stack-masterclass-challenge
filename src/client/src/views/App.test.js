@@ -7,6 +7,7 @@ import App from './App';
 import AppHeader from './AppHeader';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
+import BeerFinder from './BeerFinder';
 import NotFound from './NotFound';
 
 describe('<App/>', () => {
@@ -62,11 +63,21 @@ describe('<App/>', () => {
 
             expect(productDetailsRoute.type()).toEqual(Route);
             expect(productDetailsRoute.props().path).toEqual('/product/:productId');
+            expect(productDetailsRoute.props().exact).toBeTruthy();
             expect(productDetailsRoute.props().component).toEqual(ProductDetails);
         });
 
+        it('should have a route for the beer finder view', () => {
+            const beerFinderRoute = switchEl.childAt(2);
+
+            expect(beerFinderRoute.type()).toEqual(Route);
+            expect(beerFinderRoute.props().exact).toBeTruthy();
+            expect(beerFinderRoute.props().path).toEqual('/product/:productId/beer-finder');
+            expect(beerFinderRoute.props().component).toEqual(BeerFinder);
+        });
+
         it('should have a not matching route', () => {
-            const notMatchingRoute = switchEl.childAt(2);
+            const notMatchingRoute = switchEl.childAt(3);
 
             expect(notMatchingRoute.type()).toEqual(Route);
             expect(notMatchingRoute.props().path).toEqual('*');

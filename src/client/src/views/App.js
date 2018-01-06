@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import AppHeader from './AppHeader';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
+import BeerFinder from './BeerFinder';
 import NotFound from './NotFound';
 
 import './App.css';
@@ -20,7 +21,13 @@ function App() {
                 />
                 <Route
                     component={ ProductDetails }
+                    exact
                     path="/product/:productId"
+                />
+                <Route
+                    component={ BeerFinder }
+                    exact
+                    path="/product/:productId/beer-finder"
                 />
                 <Route
                     component={ NotFound }

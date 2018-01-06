@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ProductListItem from './ProductListItem';
 
 import ProductImage from '../components/ProductImage';
+import BeerFinderLink from '../components/BeerFinderLink';
 
 describe('<ProductListItem/>', () => {
     let component;
@@ -43,6 +44,12 @@ describe('<ProductListItem/>', () => {
 
             expect(name.props().to).toEqual(`/product/${props.productNumber}`);
             expect(name.childAt(0).text()).toEqual(props.name);
+        });
+
+        it('should have a link to the beer finder for the product', () => {
+            const link = component.find(BeerFinderLink);
+
+            expect(link.props().productNumber).toEqual(props.productNumber);
         });
     });
 });
