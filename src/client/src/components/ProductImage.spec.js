@@ -20,6 +20,17 @@ describe('<ProductImage/>', () => {
         component = shallow(<ProductImage {...props}/>);
     }
 
+    function assertDisplaysPlaceHolder() {
+        it('should display a place holder', () => {
+            expect(component.type()).toEqual('div');
+            expect(component.hasClass('image-error')).toBe(true);
+        });
+
+        it('should display a message', () => {
+            expect(component.text()).toEqual('No Image Available');
+        });
+    }
+
     afterEach(() => {
         sandbox.restore();
     });
@@ -38,7 +49,7 @@ describe('<ProductImage/>', () => {
             expect(component.props().alt).toEqual(props.altText);
         });
 
-        it('should display an imeage', () => {
+        it('should display an image', () => {
             expect(component.props().src).toEqual(props.imagePath);
         });
 
@@ -47,14 +58,17 @@ describe('<ProductImage/>', () => {
                 component.simulate('error');
             });
 
-            it('should display a place holder', () => {
-                expect(component.type()).toEqual('div');
-                expect(component.hasClass('image-error')).toBe(true);
-            });
+            assertDisplaysPlaceHolder();
+        });
+    });
 
-            it('should display a message', () => {
-                expect(component.text()).toEqual('No Image Available');
+    describe('Given the img url is null', () => {
+        beforeEach(() => {
+            renderComponent({
+                imagePath: null
             });
         });
+
+        assertDisplaysPlaceHolder();
     });
 });

@@ -5,7 +5,7 @@ import './ProductImage.css';
 
 function setError() {
     this.setState({
-        hasError: true
+        showPlaceHolder: true
     });
 }
 
@@ -14,15 +14,23 @@ class ProductImage extends Component {
         super(props);
 
         this.state = {
-            hasError: false
+            showPlaceHolder: false
         };
 
         this.setError = setError.bind(this);
     }
 
+    componentWillMount() {
+        if (this.props.imagePath === null) {
+            this.setState({
+                showPlaceHolder: true
+            });
+        }
+    }
+
     render() {
         return (
-            this.state.hasError ?
+            this.state.showPlaceHolder ?
                 <div className='image-error'>
                     {'No Image Available'}
                 </div> :
@@ -30,7 +38,7 @@ class ProductImage extends Component {
                     alt={ this.props.altText }
                     className="product-image"
                     onError={ this.setError }
-                    src={this.props.imagePath}
+                    src={ this.props.imagePath }
                 />
         );
     }
@@ -38,7 +46,7 @@ class ProductImage extends Component {
 
 ProductImage.propTypes = {
     altText: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired
+    imagePath: PropTypes.string
 };
 
 export default ProductImage;
