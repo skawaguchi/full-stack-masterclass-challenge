@@ -8,7 +8,10 @@ import './BeerFinderLink.css';
 
 function BeerFinderLink(props) {
     return (
-        <Link to={ `/product/${props.productNumber}/beer-finder` }>
+        <Link
+            className='beer-finder-link'
+            to={ `/product/${props.productNumber}/beer-finder` }
+        >
             <FontAwesomeIcon icon={ faMapMarker }/>
         </Link>
     );

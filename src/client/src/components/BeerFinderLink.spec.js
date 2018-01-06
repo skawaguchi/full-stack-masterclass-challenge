@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faMapMarker } from '@fortawesome/fontawesome-free-solid'
+import { faMapMarker } from '@fortawesome/fontawesome-free-solid';
 
 import BeerFinderLink from './BeerFinderLink';
 
@@ -22,8 +22,9 @@ describe('<BeerFinderLink/>', () => {
     beforeEach(() => {
         renderComponent();
     });
-    it('should be a react router link', () => {
+    it('should be a react router link and have an identifying class name', () => {
         expect(component.type()).toEqual(Link);
+        expect(component.hasClass('beer-finder-link')).toBe(true);
     });
 
     it('should link to the beer finder details view', () => {

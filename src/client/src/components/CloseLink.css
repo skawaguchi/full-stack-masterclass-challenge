@@ -12,9 +12,9 @@
 }
 
 .close-link svg path {
-    fill: #000000;
+    fill: #000;
 }
 
 .close-link:hover svg path {
-    fill: #666666;
+    fill: #666;
 }
