@@ -14,11 +14,14 @@ export function getProduct(overrides) {
             extensions: ['png']
         }),
         name: chance.sentence(),
+        package: chance.word(),
         primary_category: chance.word(),
         price_in_cents: chance.natural(),
         producer_name: chance.hash(),
         product_no: chance.hash(),
         secondary_category: chance.word(),
+        style: chance.sentence(),
+        tasting_note: chance.sentence(),
         tertiary_category: chance.word(),
         varietal: chance.word(),
         ...overrides

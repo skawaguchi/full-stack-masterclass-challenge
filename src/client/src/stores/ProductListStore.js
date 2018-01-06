@@ -9,7 +9,8 @@ import { getProducts } from '../repositories/Products';
 class ProductListStore {
     @observable productList = [];
 
-    @computed get displayedProductList() {
+    @computed
+    get displayedProductList() {
         return this.productList.map(({
             image_thumb_url,
             name,
@@ -23,11 +24,31 @@ class ProductListStore {
         );
     }
 
-    @action setProducts(newProducts) {
+    getDisplayedProductDetails(productNumber) {
+        return this.productList.reduce((accumulator, item) => {
+            if (item.product_no === productNumber) {
+                return {
+                    imagePath: item.image_url,
+                    name: item.name,
+                    price: item.price_in_cents,
+                    productNumber: item.product_no,
+                    productPackage: item.package,
+                    style: item.style,
+                    tastingNote: item.tasting_note
+                };
+            }
+
+            return accumulator;
+        }, null);
+    }
+
+    @action
+    setProducts(newProducts) {
         this.productList = newProducts;
     }
 
-    @action async fetchProducts() {
+    @action
+    async fetchProducts() {
         try {
             const products = await getProducts();
 

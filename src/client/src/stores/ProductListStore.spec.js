@@ -44,32 +44,54 @@ describe('ProductListStore', () => {
             store.setProducts(productListMockData);
         });
 
-        it('should get the adapted product list items for display', () => {
+        it('should get the adapted product list items', () => {
             const displayedList = store.displayedProductList;
             const expectedAttributes = [
-                'imagePath',
-                'name',
-                'productNumber'
-            ];
-            const excludedAttributes = [
-                'description',
-                'id',
-                'price_in_cents',
-                'primary_category',
-                'secondary_category',
-                'style',
-                'tertiary_category',
-                'varietal'
+                { adapted: 'imagePath', original: 'image_thumb_url' },
+                { adapted: 'name', original: 'name' },
+                { adapted: 'productNumber', original: 'product_no' }
             ];
 
-            displayedList.forEach((item) => {
-                expectedAttributes.forEach((attribute) => {
-                    expect(item[attribute]).not.toBe(undefined);
+            displayedList.forEach((item, index) => {
+                expectedAttributes.forEach((attrMap) => {
+                    const adaptedValue = item[attrMap.adapted];
+                    const originalItem = productListMockData[index];
+                    const originalValue = originalItem[attrMap.original];
+
+                    expect(adaptedValue).toEqual(originalValue);
                 });
-                excludedAttributes.forEach((attribute) => {
-                    expect(item[attribute]).toBe(undefined);
-                });
+
+                const itemKeys = Object.keys(item);
+
+                expect(itemKeys).toHaveLength(expectedAttributes.length);
             });
+        });
+
+        it('should get the adapted product list details', () => {
+            const firstProduct = productListMockData[0];
+            const firstProductNumber = firstProduct.product_no;
+            const displayedDetails = store.getDisplayedProductDetails(firstProductNumber);
+
+            const expectedAttributes = [
+                { adapted: 'imagePath', original: 'image_url' },
+                { adapted: 'name', original: 'name' },
+                { adapted: 'productPackage', original: 'package' },
+                { adapted: 'price', original: 'price_in_cents' },
+                { adapted: 'productNumber', original: 'product_no' },
+                { adapted: 'style', original: 'style' },
+                { adapted: 'tastingNote', original: 'tasting_note' }
+            ];
+
+            expectedAttributes.forEach((attrMap) => {
+                const adaptedValue = displayedDetails[attrMap.adapted];
+                const originalValue = firstProduct[attrMap.original];
+
+                expect(adaptedValue).toEqual(originalValue);
+            });
+
+            const detailsKeys = Object.keys(displayedDetails);
+
+            expect(detailsKeys).toHaveLength(expectedAttributes.length);
         });
 
         it('should set the product list', () => {
