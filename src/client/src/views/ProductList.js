@@ -21,7 +21,7 @@ function ProductList(props) {
                             `
                             Uh oh! We couldn't find any seasonal selections! There must be something wrong...
                             We'll check it out right away!
-                            Please come back in a few minutes an hopefully we'll have it figured out.
+                            Please come back in a few minutes and hopefully we'll have it figured out.
                             `
                         }
                     </div>
