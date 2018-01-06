@@ -77,6 +77,14 @@ describe('ProductListStore', () => {
         });
 
         it('should fetch the products', () => {
+            getProductsStub.returns(Promise.resolve({
+                data: {
+                    result: [
+                        getProduct()
+                    ]
+                }
+            }));
+
             store.fetchProducts();
 
             sinon.assert.calledOnce(getProductsStub);
@@ -84,16 +92,22 @@ describe('ProductListStore', () => {
 
         describe('When fetching the products is successful', () => {
             it('should update the store with the fetched products', async () => {
-                const expectedResults = [
-                    getProduct()
-                ];
+                const productMock = getProduct();
+                const expectedResults = {
+                    data: {
+                        result: [
+                            productMock
+                        ]
+                    }
+                };
 
                 getProductsStub
                     .returns(Promise.resolve(expectedResults));
 
                 await store.fetchProducts();
 
-                expect(store.displayedProductList).toHaveLength(expectedResults.length);
+                expect(store.displayedProductList[0].id).toEqual(productMock.id);
+                expect(store.displayedProductList.length).toEqual(expectedResults.data.result.length);
             });
         });
 

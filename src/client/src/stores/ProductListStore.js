@@ -33,7 +33,7 @@ class ProductListStore {
         try {
             const products = await getProducts();
 
-            this.setProducts(products);
+            this.setProducts(products.data.result);
         } catch (err) {
             throw new Error(err);
         }
