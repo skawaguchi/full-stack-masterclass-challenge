@@ -13,6 +13,7 @@ function ProductList(props) {
                             key={item.id}
                             imagePath={item.imagePath}
                             name={item.name}
+                            productNumber={item.productNumber}
                         />
                     )) :
                     <div className='no-products'>

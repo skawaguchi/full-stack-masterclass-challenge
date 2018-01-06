@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Link } from 'react-router-dom';
 
 import ProductListItem from './ProductListItem';
 
@@ -13,6 +14,7 @@ describe('ProductListItem', () => {
         props = Object.freeze({
             name: 'some name',
             imagePath: 'some/path.png',
+            productNumber: 'someId',
             ...overrides
         });
 
@@ -36,10 +38,11 @@ describe('ProductListItem', () => {
             expect(image.props().imagePath).toEqual(props.imagePath);
         });
 
-        it('should display the item name', () => {
-            const name = component.find('.name');
+        it('should have a link to the product displaying the name of the product', () => {
+            const name = component.find(Link);
 
-            expect(name.text()).toEqual(props.name);
+            expect(name.props().to).toEqual(`/product/${props.productNumber}`);
+            expect(name.childAt(0).text()).toEqual(props.name);
         });
     });
 });

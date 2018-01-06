@@ -11,16 +11,14 @@ class ProductListStore {
 
     @computed get displayedProductList() {
         return this.productList.map(({
-            id,
             image_thumb_url,
             name,
-            product_number
+            product_no
         }) =>
             ({
-                id,
                 imagePath: image_thumb_url,
                 name,
-                productNumber: product_number
+                productNumber: product_no
             })
         );
     }

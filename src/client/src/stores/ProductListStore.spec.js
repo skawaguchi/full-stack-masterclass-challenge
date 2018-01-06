@@ -47,13 +47,13 @@ describe('ProductListStore', () => {
         it('should get the adapted product list items for display', () => {
             const displayedList = store.displayedProductList;
             const expectedAttributes = [
-                'id',
                 'imagePath',
                 'name',
                 'productNumber'
             ];
             const excludedAttributes = [
                 'description',
+                'id',
                 'price_in_cents',
                 'primary_category',
                 'secondary_category',
@@ -106,7 +106,11 @@ describe('ProductListStore', () => {
 
                 await store.fetchProducts();
 
-                expect(store.displayedProductList[0].id).toEqual(productMock.id);
+                const displayedItem = store.displayedProductList[0];
+
+                expect(displayedItem.imagePath).toEqual(productMock.image_thumb_url);
+                expect(displayedItem.name).toEqual(productMock.name);
+                expect(displayedItem.productNumber).toEqual(productMock.product_no);
                 expect(store.displayedProductList.length).toEqual(expectedResults.data.result.length);
             });
         });

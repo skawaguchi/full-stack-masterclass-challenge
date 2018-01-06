@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import ProductImage from '../components/ProductImage';
 
@@ -10,16 +11,17 @@ function ProductListItem(props) {
                 altText={ props.name }
                 imagePath={ props.imagePath}
             />
-            <div className="name">
+            <Link to={ `/product/${props.productNumber}` }>
                 { props.name }
-            </div>
+            </Link>
         </div>
     );
 }
 
 ProductListItem.propTypes = {
     imagePath: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    productNumber: PropTypes.string.isRequired
 };
 
 export default ProductListItem;

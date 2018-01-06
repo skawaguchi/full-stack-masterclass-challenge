@@ -39,6 +39,7 @@ describe('ProductList', () => {
 
             expect(item.props().name).toEqual(itemProps.name);
             expect(item.props().imagePath).toEqual(itemProps.imagePath);
+            expect(item.props().productNumber).toEqual(itemProps.productNumber);
         });
     });
 
