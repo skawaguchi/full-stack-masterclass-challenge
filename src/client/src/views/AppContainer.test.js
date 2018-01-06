@@ -2,14 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Route, Switch } from 'react-router-dom';
 
-import App from './App';
+import AppContainer from './AppContainer';
 
 import Home from './Home';
 import ProductDetails from './ProductDetails';
 import BeerFinder from './BeerFinder';
 import NotFound from './NotFound';
 
-describe('<App/>', () => {
+describe('<AppContainer/>', () => {
     let component;
     let props;
 
@@ -19,7 +19,7 @@ describe('<App/>', () => {
         });
 
         component = shallow(
-            <App {...props}/>
+            <AppContainer {...props}/>
         );
     }
 
