@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
 
 import AppProvider from './AppProvider';
 import ProductListProvider from './ProductListProvider';
@@ -25,6 +26,12 @@ describe('<AppProvider/>', () => {
 
     it('should be a browser router', () => {
         expect(component.type()).toEqual(BrowserRouter);
+    });
+
+    it('should have localization', () => {
+        const intl = component.find(IntlProvider);
+
+        expect(intl.props().locale).toEqual('en');
     });
 
     it('should have a provider for the product list', () => {
