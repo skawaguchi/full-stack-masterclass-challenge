@@ -25,7 +25,9 @@ describe('<AppProvider/>', () => {
     });
 
     it('should be a browser router', () => {
-        expect(component.type()).toEqual(BrowserRouter);
+        const browserRouter = component.find(BrowserRouter);
+
+        expect(browserRouter).toHaveLength(1);
     });
 
     it('should have localization', () => {

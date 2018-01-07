@@ -8,13 +8,14 @@ import ProductListProvider from './ProductListProvider';
 
 function RouterProvider() {
     return (
-        <BrowserRouter>
-            <IntlProvider locale="en">
+        <IntlProvider locale="en">
+            <BrowserRouter>
                 <ProductListProvider>
                     <App/>
                 </ProductListProvider>
-            </IntlProvider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </IntlProvider>
+
     );
 }
 
