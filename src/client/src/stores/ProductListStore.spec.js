@@ -52,7 +52,7 @@ describe('ProductListStore', () => {
             expect(adaptedProduct.imageThumbUrl).toEqual(originalProduct.image_thumb_url);
             expect(adaptedProduct.name).toEqual(originalProduct.name);
             expect(adaptedProduct.productPackage).toEqual(originalProduct.package);
-            expect(adaptedProduct.price).toEqual(originalProduct.price_in_cents);
+            expect(adaptedProduct.price).toEqual(originalProduct.price_in_cents / 100);
             expect(adaptedProduct.style).toEqual(originalProduct.style);
             expect(adaptedProduct.tastingNote).toEqual(originalProduct.tasting_note);
             expect(adaptedProduct.varietal).toEqual(originalProduct.varietal);

@@ -46,7 +46,7 @@ class ProductListStore {
             imageThumbUrl: product.image_thumb_url,
             name: product.name,
             productPackage: product.package,
-            price: product.price_in_cents,
+            price: product.price_in_cents / 100,
             style: product.style,
             tastingNote: product.tasting_note,
             varietal: product.varietal
