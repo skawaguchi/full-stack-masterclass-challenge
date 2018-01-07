@@ -1,3 +1,7 @@
 .product-details .product-image {
     max-width: 300px;
 }
+
+.product-details dt::after {
+    content: ":";
+}
