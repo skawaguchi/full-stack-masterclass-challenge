@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import AppContainer from './AppContainer';
-import CloseLink from '../components/CloseLink';
+import ProductDetailsContent from './product-details/ProductDetailsContent';
 
-function ProductDetails() {
+function ProductDetails(props) {
+    const id = props.match.params.productId;
+
     return (
         <AppContainer>
-            <section className="product-details">
-                <CloseLink/>
-            </section>
+            <ProductDetailsContent id={ id }/>
         </AppContainer>
     );
 }
+
 export default ProductDetails;

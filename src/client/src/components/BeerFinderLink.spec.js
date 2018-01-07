@@ -12,7 +12,7 @@ describe('<BeerFinderLink/>', () => {
 
     function renderComponent(overrides) {
         props = Object.freeze({
-            productNumber: 'someProductNumber',
+            id: 'someProductId',
             ...overrides
         });
 
@@ -28,7 +28,7 @@ describe('<BeerFinderLink/>', () => {
     });
 
     it('should link to the beer finder details view', () => {
-        expect(component.props().to).toEqual(`/product/${props.productNumber}/beer-finder`);
+        expect(component.props().to).toEqual(`/product/${props.id}/beer-finder`);
     });
 
     it('should have an icon', () => {

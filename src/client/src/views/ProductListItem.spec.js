@@ -13,9 +13,9 @@ describe('<ProductListItem/>', () => {
 
     function renderComponent(overrides) {
         props = Object.freeze({
-            name: 'some name',
+            id: 'someId',
             imagePath: 'some/path.png',
-            productNumber: 'someId',
+            name: 'some name',
             ...overrides
         });
 
@@ -42,14 +42,14 @@ describe('<ProductListItem/>', () => {
         it('should have a link to the product displaying the name of the product', () => {
             const name = component.find(Link);
 
-            expect(name.props().to).toEqual(`/product/${props.productNumber}`);
+            expect(name.props().to).toEqual(`/product/${props.id}`);
             expect(name.childAt(0).text()).toEqual(props.name);
         });
 
         it('should have a link to the beer finder for the product', () => {
             const link = component.find(BeerFinderLink);
 
-            expect(link.props().productNumber).toEqual(props.productNumber);
+            expect(link.props().id).toEqual(props.id);
         });
     });
 });

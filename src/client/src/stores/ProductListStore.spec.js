@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 import ProductListStore from './ProductListStore';
 
-import { getProduct } from '../mockUtils';
+import { getAdaptedProduct, getProduct } from '../mockUtils';
 import * as productRepository from '../repositories/Products';
 
 const sandbox = sinon.sandbox.create();
@@ -28,7 +28,7 @@ describe('ProductListStore', () => {
         });
     });
 
-    describe('Methods', () => {
+    describe('Fetching and adapting data', () => {
         let productListMockData;
         let getProductsStub;
 
@@ -36,66 +36,26 @@ describe('ProductListStore', () => {
             getProductsStub = sandbox.stub(productRepository, 'getProducts');
 
             productListMockData = [
-                getProduct(),
-                getProduct(),
                 getProduct()
             ];
 
             store.setProducts(productListMockData);
         });
 
-        it('should get the adapted product list items', () => {
-            const displayedList = store.displayedProductList;
-            const expectedAttributes = [
-                { adapted: 'imagePath', original: 'image_thumb_url' },
-                { adapted: 'name', original: 'name' },
-                { adapted: 'productNumber', original: 'product_no' }
-            ];
+        it('should set the product list and adapt the necessary values', () => {
+            const adaptedProduct = store.productList[0];
+            const originalProduct = productListMockData[0];
 
-            displayedList.forEach((item, index) => {
-                expectedAttributes.forEach((attrMap) => {
-                    const adaptedValue = item[attrMap.adapted];
-                    const originalItem = productListMockData[index];
-                    const originalValue = originalItem[attrMap.original];
-
-                    expect(adaptedValue).toEqual(originalValue);
-                });
-
-                const itemKeys = Object.keys(item);
-
-                expect(itemKeys).toHaveLength(expectedAttributes.length);
-            });
-        });
-
-        it('should get the adapted product list details', () => {
-            const firstProduct = productListMockData[0];
-            const firstProductNumber = firstProduct.product_no;
-            const displayedDetails = store.getDisplayedProductDetails(firstProductNumber);
-
-            const expectedAttributes = [
-                { adapted: 'imagePath', original: 'image_url' },
-                { adapted: 'name', original: 'name' },
-                { adapted: 'productPackage', original: 'package' },
-                { adapted: 'price', original: 'price_in_cents' },
-                { adapted: 'productNumber', original: 'product_no' },
-                { adapted: 'style', original: 'style' },
-                { adapted: 'tastingNote', original: 'tasting_note' }
-            ];
-
-            expectedAttributes.forEach((attrMap) => {
-                const adaptedValue = displayedDetails[attrMap.adapted];
-                const originalValue = firstProduct[attrMap.original];
-
-                expect(adaptedValue).toEqual(originalValue);
-            });
-
-            const detailsKeys = Object.keys(displayedDetails);
-
-            expect(detailsKeys).toHaveLength(expectedAttributes.length);
-        });
-
-        it('should set the product list', () => {
             expect(store.productList).toHaveLength(productListMockData.length);
+            expect(adaptedProduct.id).toEqual(originalProduct.id.toString());
+            expect(adaptedProduct.imageUrl).toEqual(originalProduct.image_url);
+            expect(adaptedProduct.imageThumbUrl).toEqual(originalProduct.image_thumb_url);
+            expect(adaptedProduct.name).toEqual(originalProduct.name);
+            expect(adaptedProduct.productPackage).toEqual(originalProduct.package);
+            expect(adaptedProduct.price).toEqual(originalProduct.price_in_cents);
+            expect(adaptedProduct.style).toEqual(originalProduct.style);
+            expect(adaptedProduct.tastingNote).toEqual(originalProduct.tasting_note);
+            expect(adaptedProduct.varietal).toEqual(originalProduct.varietal);
         });
 
         it('should fetch the products', () => {
@@ -123,16 +83,15 @@ describe('ProductListStore', () => {
                     }
                 };
 
-                getProductsStub
-                    .returns(Promise.resolve(expectedResults));
+                getProductsStub.returns(Promise.resolve(expectedResults));
 
                 await store.fetchProducts();
 
                 const displayedItem = store.displayedProductList[0];
 
+                expect(displayedItem.id).toEqual(productMock.id.toString());
                 expect(displayedItem.imagePath).toEqual(productMock.image_thumb_url);
                 expect(displayedItem.name).toEqual(productMock.name);
-                expect(displayedItem.productNumber).toEqual(productMock.product_no);
                 expect(store.displayedProductList.length).toEqual(expectedResults.data.result.length);
             });
         });
@@ -152,6 +111,73 @@ describe('ProductListStore', () => {
                     expect(err).toEqual(new Error(expectedError));
                 }
             });
+        });
+    });
+
+    describe('Accessing the store', () => {
+        let productListMockData;
+        let getProductsStub;
+
+        beforeEach(() => {
+            getProductsStub = sandbox.stub(productRepository, 'getProducts');
+
+            productListMockData = [
+                getAdaptedProduct(),
+                getAdaptedProduct(),
+                getAdaptedProduct()
+            ];
+
+            store.productList = productListMockData;
+        });
+
+        it('should get the adapted product list items', () => {
+            const displayedList = store.displayedProductList;
+            const expectedAttributes = [
+                { adapted: 'id', original: 'id' },
+                { adapted: 'imagePath', original: 'imageThumbUrl' },
+                { adapted: 'name', original: 'name' }
+            ];
+
+            displayedList.forEach((item, index) => {
+                expectedAttributes.forEach((attrMap) => {
+                    const adaptedValue = item[attrMap.adapted];
+                    const originalItem = productListMockData[index];
+                    const originalValue = originalItem[attrMap.original];
+
+                    expect(adaptedValue).toEqual(originalValue);
+                });
+
+                const itemKeys = Object.keys(item);
+
+                expect(itemKeys).toHaveLength(expectedAttributes.length);
+            });
+        });
+
+        it('should get the adapted product list details', () => {
+            const firstProduct = productListMockData[0];
+            const firstProductId = firstProduct.id;
+            const displayedDetails = store.getDisplayedProductDetails(firstProductId);
+
+            const expectedAttributes = [
+                { adapted: 'id', original: 'id' },
+                { adapted: 'imagePath', original: 'imageUrl' },
+                { adapted: 'name', original: 'name' },
+                { adapted: 'productPackage', original: 'productPackage' },
+                { adapted: 'price', original: 'price' },
+                { adapted: 'style', original: 'style' },
+                { adapted: 'tastingNote', original: 'tastingNote' }
+            ];
+
+            expectedAttributes.forEach((attrMap) => {
+                const adaptedValue = displayedDetails[attrMap.adapted];
+                const originalValue = firstProduct[attrMap.original];
+
+                expect(adaptedValue).toEqual((originalValue));
+            });
+
+            const detailsKeys = Object.keys(displayedDetails);
+
+            expect(detailsKeys).toHaveLength(expectedAttributes.length);
         });
     });
 });

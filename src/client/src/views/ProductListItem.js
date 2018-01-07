@@ -12,18 +12,18 @@ function ProductListItem(props) {
                 altText={ props.name }
                 imagePath={ props.imagePath}
             />
-            <Link to={ `/product/${props.productNumber}` }>
+            <Link to={ `/product/${props.id}` }>
                 { props.name }
             </Link>
-            <BeerFinderLink productNumber={ props.productNumber }/>
+            <BeerFinderLink id={ props.id }/>
         </div>
     );
 }
 
 ProductListItem.propTypes = {
+    id: PropTypes.string.isRequired,
     imagePath: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    productNumber: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired
 };
 
 export default ProductListItem;

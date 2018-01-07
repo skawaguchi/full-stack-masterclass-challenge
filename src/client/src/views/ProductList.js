@@ -10,10 +10,10 @@ function ProductList(props) {
                 props.productListItems.length ?
                     props.productListItems.map((item) => (
                         <ProductListItem
+                            id={item.id}
                             key={item.id}
                             imagePath={item.imagePath}
                             name={item.name}
-                            productNumber={item.productNumber}
                         />
                     )) :
                     <div className='no-products'>

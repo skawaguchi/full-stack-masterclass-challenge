@@ -10,7 +10,7 @@ function BeerFinderLink(props) {
     return (
         <Link
             className='beer-finder-link'
-            to={ `/product/${props.productNumber}/beer-finder` }
+            to={ `/product/${props.id}/beer-finder` }
         >
             <FontAwesomeIcon icon={ faMapMarker }/>
         </Link>
@@ -18,7 +18,7 @@ function BeerFinderLink(props) {
 }
 
 BeerFinderLink.propTypes = {
-    productNumber: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired
 };
 
 export default BeerFinderLink;

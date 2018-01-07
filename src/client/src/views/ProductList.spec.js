@@ -37,9 +37,9 @@ describe('<ProductList/>', () => {
             const item = component.find(ProductListItem);
             const itemProps = props.productListItems[0];
 
-            expect(item.props().name).toEqual(itemProps.name);
+            expect(item.props().id).toEqual(itemProps.id);
             expect(item.props().imagePath).toEqual(itemProps.imagePath);
-            expect(item.props().productNumber).toEqual(itemProps.productNumber);
+            expect(item.props().name).toEqual(itemProps.name);
         });
     });
 

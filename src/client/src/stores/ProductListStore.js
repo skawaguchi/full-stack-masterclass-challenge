@@ -11,30 +11,26 @@ class ProductListStore {
 
     @computed
     get displayedProductList() {
-        return this.productList.map(({
-            image_thumb_url,
-            name,
-            product_no
-        }) =>
+        return this.productList.map((item) =>
             ({
-                imagePath: image_thumb_url,
-                name,
-                productNumber: product_no
+                id: item.id,
+                imagePath: item.imageThumbUrl,
+                name: item.name
             })
         );
     }
 
-    getDisplayedProductDetails(productNumber) {
+    getDisplayedProductDetails(id) {
         return this.productList.reduce((accumulator, item) => {
-            if (item.product_no === productNumber) {
+            if (item.id === id) {
                 return {
-                    imagePath: item.image_url,
+                    id: item.id,
+                    imagePath: item.imageUrl,
                     name: item.name,
-                    price: item.price_in_cents,
-                    productNumber: item.product_no,
-                    productPackage: item.package,
+                    price: item.price,
+                    productPackage: item.productPackage,
                     style: item.style,
-                    tastingNote: item.tasting_note
+                    tastingNote: item.tastingNote
                 };
             }
 
@@ -44,7 +40,17 @@ class ProductListStore {
 
     @action
     setProducts(newProducts) {
-        this.productList = newProducts;
+        this.productList = newProducts.map((product) => ({
+            id: product.id.toString(),
+            imageUrl: product.image_url,
+            imageThumbUrl: product.image_thumb_url,
+            name: product.name,
+            productPackage: product.package,
+            price: product.price_in_cents,
+            style: product.style,
+            tastingNote: product.tasting_note,
+            varietal: product.varietal
+        }));
     }
 
     @action

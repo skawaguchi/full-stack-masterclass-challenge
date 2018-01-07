@@ -16,8 +16,5 @@ export function getProducts() {
         params
     };
 
-    return get(
-        repoUrl,
-        config
-    );
+    return get(repoUrl, config);
 }

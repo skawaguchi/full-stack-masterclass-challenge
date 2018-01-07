@@ -4,37 +4,35 @@ import { shallow } from 'enzyme';
 import ProductDetails from './ProductDetails';
 
 import AppContainer from './AppContainer';
-import CloseLink from '../components/CloseLink';
+import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 describe('<ProductDetails/>', () => {
     let component;
-    let props;
 
-    function renderComponent(overrides) {
-        props = Object.freeze({
-            ...overrides
-        });
+    function renderComponent() {
+        const match = {
+            params: {
+                productId: 'someId'
+            }
+        };
 
-        component = shallow(<ProductDetails {...props}/>);
+        component = shallow(<ProductDetails match={ match }/>);
     }
 
-    beforeEach(() => {
-        renderComponent();
-    });
+    describe('Given products are loaded', () => {
+        beforeEach(() => {
+            renderComponent();
+        });
 
-    it('should ensure the products are loaded', () => {
-        expect(component.type()).toEqual(AppContainer);
-    });
+        it('should ensure the products are loaded', () => {
+            expect(component.type()).toEqual(AppContainer);
+        });
 
-    it('should have a container element', () => {
-        const container = component.childAt(0);
+        it('should have product details content', () => {
+            const content = component.find(ProductDetailsContent);
 
-        expect(container.type()).toEqual('section');
-        expect(container.hasClass('product-details')).toBe(true);
-    });
-
-    it('should have a close link', () => {
-        expect(component.find(CloseLink)).toHaveLength(1);
+            expect(content).toHaveLength(1);
+        });
     });
 });
 

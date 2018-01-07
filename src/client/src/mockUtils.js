@@ -6,7 +6,7 @@ const chance = new Chance();
 export function getProduct(overrides) {
     return {
         description: null,
-        id: chance.hash(),
+        id: chance.natural(),
         image_url: chance.url({
             extensions: ['png']
         }),
@@ -18,11 +18,30 @@ export function getProduct(overrides) {
         primary_category: chance.word(),
         price_in_cents: chance.natural(),
         producer_name: chance.hash(),
-        product_no: chance.hash(),
         secondary_category: chance.word(),
         style: chance.sentence(),
         tasting_note: chance.sentence(),
         tertiary_category: chance.word(),
+        varietal: chance.word(),
+        ...overrides
+    };
+}
+
+export function getAdaptedProduct(overrides) {
+    return {
+        description: null,
+        id: chance.sentence(),
+        imageUrl: chance.url({
+            extensions: ['png']
+        }),
+        imageThumbUrl: chance.url({
+            extensions: ['png']
+        }),
+        name: chance.sentence(),
+        price: chance.natural(),
+        productPackage: chance.word(),
+        style: chance.sentence(),
+        tastingNote: chance.sentence(),
         varietal: chance.word(),
         ...overrides
     };
@@ -38,7 +57,6 @@ export function getProductListItem(overrides) {
             extensions: ['png']
         }),
         name: chance.sentence(),
-        productNumber: chance.hash(),
         ...overrides
     };
 }
