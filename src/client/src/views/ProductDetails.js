@@ -4,11 +4,11 @@ import ProductListContainer from './ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 function ProductDetails(props) {
-    const id = props.match.params.productId;
+    const { productId } = props.match.params;
 
     return (
         <ProductListContainer>
-            <ProductDetailsContent id={ id }/>
+            <ProductDetailsContent productId={ productId }/>
         </ProductListContainer>
     );
 }

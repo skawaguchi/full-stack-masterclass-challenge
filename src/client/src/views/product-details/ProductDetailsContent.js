@@ -22,7 +22,7 @@ function getOptionalContent(config, product) {
 @observer
 class ProductDetailsContent extends Component {
     render() {
-        const product = this.props.productListStore.getDisplayedProductDetails(this.props.id);
+        const product = this.props.productListStore.getDisplayedProductDetails(this.props.productId);
         const tastingNoteConfig = {
             attr: 'tastingNote',
             className: 'tasting-note',
@@ -76,7 +76,7 @@ class ProductDetailsContent extends Component {
 }
 
 ProductDetailsContent.wrappedComponent.propTypes = {
-    id: PropTypes.string.isRequired,
+    productId: PropTypes.string.isRequired,
     productListStore: PropTypes.shape({
         fetchProducts: PropTypes.func.isRequired,
         displayedProductList: PropTypes.arrayOf(PropTypes.object)

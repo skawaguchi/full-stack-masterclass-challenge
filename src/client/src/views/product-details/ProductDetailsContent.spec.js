@@ -26,7 +26,7 @@ describe('<ProductDetailsContent/>', () => {
 
         component = shallow(
             <ProductDetailsContent
-                id={ productMock.id }
+                productId={ productMock.id }
                 productListStore={ storeMock }
             />
         ).dive();

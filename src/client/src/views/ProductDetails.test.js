@@ -8,11 +8,12 @@ import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 describe('<ProductDetails/>', () => {
     let component;
+    let productIdMock;
 
     function renderComponent() {
         const match = {
             params: {
-                productId: 'someId'
+                productId: productIdMock
             }
         };
 
@@ -21,6 +22,8 @@ describe('<ProductDetails/>', () => {
 
     describe('Given products are loaded', () => {
         beforeEach(() => {
+            productIdMock = 'someId';
+
             renderComponent();
         });
 
@@ -31,7 +34,7 @@ describe('<ProductDetails/>', () => {
         it('should have product details content', () => {
             const content = component.find(ProductDetailsContent);
 
-            expect(content).toHaveLength(1);
+            expect(content.props().productId).toEqual(productIdMock);
         });
     });
 });
