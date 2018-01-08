@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Home from './Home';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import AppHeader from './AppHeader';
 import ProductList from './ProductList';
 
@@ -27,7 +27,7 @@ describe('<Home/>', () => {
         });
 
         it('should ensure the products are loaded', () => {
-            expect(component.type()).toEqual(AppContainer);
+            expect(component.type()).toEqual(ProductListContainer);
         });
 
         it('should have a containing element that is uniquely identifiable', () => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { inject, observer } from 'mobx-react';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import AppHeader from './AppHeader';
 import ProductList from './ProductList';
 
@@ -11,14 +11,14 @@ import ProductList from './ProductList';
 class Home extends Component {
     render() {
         return (
-            <AppContainer>
+            <ProductListContainer>
                 <section className="home">
                     <AppHeader/>
                     <ProductList
                         productListItems={this.props.productListStore.displayedProductList}
                     />
                 </section>
-            </AppContainer>
+            </ProductListContainer>
         );
     }
 }

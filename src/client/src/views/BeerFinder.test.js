@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import BeerFinder from './BeerFinder';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import CloseLink from '../components/CloseLink';
 
 describe('<BeerFinder/>', () => {
@@ -23,7 +23,7 @@ describe('<BeerFinder/>', () => {
     });
 
     it('should ensure the products are loaded', () => {
-        expect(component.type()).toEqual(AppContainer);
+        expect(component.type()).toEqual(ProductListContainer);
     });
 
     it('should have a container element', () => {

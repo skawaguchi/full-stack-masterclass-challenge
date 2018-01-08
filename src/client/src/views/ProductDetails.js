@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 function ProductDetails(props) {
     const id = props.match.params.productId;
 
     return (
-        <AppContainer>
+        <ProductListContainer>
             <ProductDetailsContent id={ id }/>
-        </AppContainer>
+        </ProductListContainer>
     );
 }
 

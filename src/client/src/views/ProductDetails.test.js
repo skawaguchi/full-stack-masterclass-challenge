@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import ProductDetails from './ProductDetails';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 describe('<ProductDetails/>', () => {
@@ -25,7 +25,7 @@ describe('<ProductDetails/>', () => {
         });
 
         it('should ensure the products are loaded', () => {
-            expect(component.type()).toEqual(AppContainer);
+            expect(component.type()).toEqual(ProductListContainer);
         });
 
         it('should have product details content', () => {

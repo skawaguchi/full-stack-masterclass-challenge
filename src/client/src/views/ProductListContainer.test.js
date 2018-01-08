@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import { MemoryRouter } from 'react-router';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 
 import Loader from '../components/Loader';
 
@@ -13,7 +13,7 @@ import { getMockReactClass } from '../mockUtils';
 
 const sandbox = sinon.sandbox.create();
 
-describe('<AppContainer/>', () => {
+describe('<ProductListContainer/>', () => {
     let component;
     let store;
     let MockReactClass;
@@ -21,18 +21,18 @@ describe('<AppContainer/>', () => {
     function renderMountedComponent() {
         component = mount(
             <MemoryRouter>
-                <AppContainer productListStore={ store }>
+                <ProductListContainer productListStore={ store }>
                     <MockReactClass/>
-                </AppContainer>
+                </ProductListContainer>
             </MemoryRouter>
         );
     }
 
     function renderWrappedComponent() {
         component = shallow(
-            <AppContainer productListStore={ store }>
+            <ProductListContainer productListStore={ store }>
                 <MockReactClass/>
-            </AppContainer>
+            </ProductListContainer>
         ).dive();
     }
 

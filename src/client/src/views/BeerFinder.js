@@ -1,15 +1,15 @@
 import React from 'react';
 
-import AppContainer from './AppContainer';
+import ProductListContainer from './ProductListContainer';
 import CloseLink from '../components/CloseLink';
 
 function BeerFinder() {
     return (
-        <AppContainer>
+        <ProductListContainer>
             <section className="beer-finder">
                 <CloseLink/>
             </section>
-        </AppContainer>
+        </ProductListContainer>
     );
 }
 export default BeerFinder;

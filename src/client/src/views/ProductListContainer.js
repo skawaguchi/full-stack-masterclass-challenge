@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 
 @inject('productListStore')
 @observer
-class AppContainer extends Component {
+class ProductListContainer extends Component {
     componentDidMount() {
         if (this.props.productListStore.productList.length === 0) {
             this.props.productListStore.fetchProducts();
@@ -22,8 +22,8 @@ class AppContainer extends Component {
     }
 }
 
-AppContainer.propTypes = {
+ProductListContainer.propTypes = {
     children: PropTypes.node.isRequired
 };
 
-export default AppContainer;
+export default ProductListContainer;
