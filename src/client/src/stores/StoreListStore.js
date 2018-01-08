@@ -55,7 +55,7 @@ class StoreListStore {
         try {
             const geo = await getGeo();
 
-            this.postalCode = geo.data.result.postal_code;
+            this.postalCode = geo.data.zip_code;
         } catch (err) {
             throw new Error(err);
         }

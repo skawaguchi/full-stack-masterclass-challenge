@@ -182,9 +182,7 @@ describe('StoreListStore', () => {
                 const postalCodeMock = 'some postal code';
                 const expectedResults = {
                     data: {
-                        result: {
-                            postal_code: postalCodeMock
-                        }
+                        zip_code: postalCodeMock
                     }
                 };
 
