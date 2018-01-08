@@ -193,5 +193,14 @@ describe('ProductListStore', () => {
 
             expect(detailsKeys).toHaveLength(expectedAttributes.length);
         });
+
+        it('should get the product name', () => {
+            const target = productListMockData[1];
+            const productId = target.id;
+            const productName = store.getProductName(productId);
+            const expectedValue = target.name;
+
+            expect(productName).toEqual(expectedValue);
+        });
     });
 });

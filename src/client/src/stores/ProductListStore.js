@@ -38,6 +38,16 @@ class ProductListStore {
         }, null);
     }
 
+    getProductName(id) {
+        return this.productList.reduce((accumulator, item) => {
+            if (item.id === id) {
+                return item.name;
+            }
+
+            return accumulator;
+        }, null);
+    }
+
     @action
     setProducts(newProducts) {
         this.productList = newProducts.map((product) => ({
