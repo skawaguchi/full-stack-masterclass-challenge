@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react';
 
 import { Stores } from '../stores/index';
 
-function RouterProvider(props) {
+function ProductListProvider(props) {
     return (
         <Provider productListStore={ Stores.productListStore }>
             { props.children }
@@ -12,8 +12,8 @@ function RouterProvider(props) {
     );
 }
 
-RouterProvider.propTypes = {
+ProductListProvider.propTypes = {
     children: PropTypes.node.isRequired
 };
 
-export default RouterProvider;
+export default ProductListProvider;
