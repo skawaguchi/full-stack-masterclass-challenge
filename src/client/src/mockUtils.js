@@ -76,7 +76,6 @@ export function getStore(overrides) {
         postal_code: chance.postal(),
         quantity: chance.natural(),
         telephone: chance.phone(),
-        producer_name: chance.hash(),
         sunday_open: chance.natural({ min: 0, max: 1440}),
         sunday_close: chance.natural({ min: 0, max: 1440}),
         monday_open: chance.natural({ min: 0, max: 1440}),
