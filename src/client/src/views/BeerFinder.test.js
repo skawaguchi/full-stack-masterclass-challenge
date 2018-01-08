@@ -4,21 +4,25 @@ import { shallow } from 'enzyme';
 import BeerFinder from './BeerFinder';
 
 import ProductListContainer from './ProductListContainer';
-import CloseLink from '../components/CloseLink';
+import BeerFinderContent from './beer-finder/BeerFinderContent';
 
 describe('<BeerFinder/>', () => {
     let component;
-    let props;
+    let productIdMock;
 
-    function renderComponent(overrides) {
-        props = Object.freeze({
-            ...overrides
-        });
+    function renderComponent() {
+        const match = {
+            params: {
+                productId: productIdMock
+            }
+        };
 
-        component = shallow(<BeerFinder {...props}/>);
+        component = shallow(<BeerFinder match={ match }/>);
     }
 
     beforeEach(() => {
+        productIdMock = 'someId';
+
         renderComponent();
     });
 
@@ -26,15 +30,10 @@ describe('<BeerFinder/>', () => {
         expect(component.type()).toEqual(ProductListContainer);
     });
 
-    it('should have a container element', () => {
-        const container = component.childAt(0);
+    it('should have content', () => {
+        const content = component.find(BeerFinderContent);
 
-        expect(container.type()).toEqual('section');
-        expect(container.hasClass('beer-finder')).toBe(true);
-    });
-
-    it('should have a close link', () => {
-        expect(component.find(CloseLink)).toHaveLength(1);
+        expect(content.props().productId).toEqual(productIdMock);
     });
 });
 
