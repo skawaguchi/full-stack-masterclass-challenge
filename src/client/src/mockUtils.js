@@ -105,7 +105,7 @@ export function getAdaptedStore(overrides) {
         hasParking: chance.bool(),
         hasTransitAccess: chance.bool(),
         hasWheelchairAccess: chance.bool(),
-        id: chance.natural(),
+        id: chance.hash(),
         postalCode: chance.postal(),
         quantity: chance.natural(),
         telephone: chance.phone(),
