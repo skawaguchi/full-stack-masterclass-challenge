@@ -8,6 +8,10 @@ import { getStores } from '../repositories/Stores';
 class StoreListStore {
     @observable storeList = [];
 
+    getStoresByDistance() {
+        return this.storeList.sort((a, b) => a.distance > b.distance);
+    }
+
     @action
     setStores(newStores) {
         this.storeList = newStores.map((store) => ({
