@@ -32,7 +32,7 @@ describe('<BeerFinderContent/>', () => {
         };
         const storeStoreMock = {
             postalCode: postalCodeMock,
-            getStoresByDistance: () => sortedStoreList
+            storeList: sortedStoreList
         };
 
         productStoreMock.getProductName.returns(productMock.name);

@@ -166,20 +166,6 @@ describe('StoreListStore', () => {
             });
         });
 
-        it('should return the list of stores sorted by distance', () => {
-            setupStoreMock([
-                getStore({ distance_in_meters: 1000, id: 'first' }),
-                getStore({ distance_in_meters: 10, id: 'second' }),
-                getStore({ distance_in_meters: 100, id: 'third' })
-            ]);
-
-            const sortedList = store.getStoresByDistance();
-
-            expect(sortedList[0].id).toEqual('second');
-            expect(sortedList[1].id).toEqual('third');
-            expect(sortedList[2].id).toEqual('first');
-        });
-
         describe('when fetching the postal code is successful', () => {
             it('should update the store with the fetched postal code', async () => {
                 const postalCodeMock = 'some postal code';

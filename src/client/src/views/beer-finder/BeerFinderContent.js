@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { inject, observer } from 'mobx-react';
+import { inject, observer, PropTypes as MobXPropTypes } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
@@ -15,7 +15,6 @@ import './BeerFinderContent.css';
 class BeerFinderContent extends Component {
     render() {
         const productName = this.props.productListStore.getProductName(this.props.productId);
-        const storeList = this.props.storeListStore.getStoresByDistance();
 
         return (
             <section className="beer-finder">
@@ -46,7 +45,7 @@ class BeerFinderContent extends Component {
                             <th>{'Directions'}</th>
                         </tr>
                     </thead>
-                    <StoreListTableRows storeList={ storeList }/>
+                    <StoreListTableRows storeList={ this.props.storeListStore.storeList }/>
                 </table>
             </section>
         );
@@ -59,7 +58,7 @@ BeerFinderContent.wrappedComponent.propTypes = {
         getProductName: PropTypes.func.isRequired
     }),
     storeListStore: PropTypes.shape({
-        getStoresByDistance: PropTypes.func.isRequired
+        storeList: MobXPropTypes.arrayOrObservableArray.isRequired
     })
 };
 

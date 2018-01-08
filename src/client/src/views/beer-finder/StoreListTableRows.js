@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import { PropTypes as MobXPropTypes } from 'mobx-react';
 
 import StoreListTableRowItem from './StoreListTableRowItem';
 
@@ -18,9 +18,7 @@ function StoreListTableRow(props) {
 }
 
 StoreListTableRow.propTypes = {
-    storeList: PropTypes.arrayOf(
-        PropTypes.object
-    ).isRequired
+    storeList: MobXPropTypes.arrayOrObservableArray.isRequired
 };
 
 export default StoreListTableRow;
