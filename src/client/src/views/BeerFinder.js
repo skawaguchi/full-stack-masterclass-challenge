@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductListContainer from './ProductListContainer';
+import StoreListContainer from './StoreListContainer';
 import BeerFinderContent from './beer-finder/BeerFinderContent';
 
 function BeerFinder(props) {
@@ -8,7 +9,9 @@ function BeerFinder(props) {
 
     return (
         <ProductListContainer>
-            <BeerFinderContent productId={ productId }/>
+            <StoreListContainer productId={ productId }>
+                <BeerFinderContent productId={ productId }/>
+            </StoreListContainer>
         </ProductListContainer>
     );
 }

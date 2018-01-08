@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import BeerFinder from './BeerFinder';
 
 import ProductListContainer from './ProductListContainer';
+import StoreListContainer from './StoreListContainer';
 import BeerFinderContent from './beer-finder/BeerFinderContent';
 
 describe('<BeerFinder/>', () => {
@@ -28,6 +29,12 @@ describe('<BeerFinder/>', () => {
 
     it('should ensure the products are loaded', () => {
         expect(component.type()).toEqual(ProductListContainer);
+    });
+
+    it('should ensure the stores are loaded', () => {
+        const container = component.find(StoreListContainer);
+
+        expect(container.props().productId).toEqual(productIdMock);
     });
 
     it('should have content', () => {
