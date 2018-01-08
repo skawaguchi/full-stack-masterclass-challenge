@@ -1,7 +1,8 @@
 import { get } from 'axios';
 
+import { repoKey } from './repoKey';
+
 export function getProducts() {
-    const key = 'MDphYzU1NTBmZS1mMGMwLTExZTctYmI3ZS1kNzRiYjJiYWFjNzQ6eUVObmVRdnVCYmNLeFBPR0JWOFpqdjh5bDdmTkk2eUVzcmZ1';
     const repoUrl = 'http://lcboapi.com/products';
     const params = {
         per_page: 100,
@@ -11,7 +12,7 @@ export function getProducts() {
     };
     const config = {
         headers: {
-            Authorization: `token ${key}`
+            Authorization: `token ${repoKey}`
         },
         params
     };
