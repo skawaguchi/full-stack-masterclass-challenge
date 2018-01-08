@@ -5,13 +5,16 @@ import { IntlProvider } from 'react-intl';
 import App from './App';
 
 import ProductListProvider from './ProductListProvider';
+import StoreListProvider from './StoreListProvider';
 
 function RouterProvider() {
     return (
         <IntlProvider locale="en">
             <BrowserRouter>
                 <ProductListProvider>
-                    <App/>
+                    <StoreListProvider>
+                        <App/>
+                    </StoreListProvider>
                 </ProductListProvider>
             </BrowserRouter>
         </IntlProvider>

@@ -5,6 +5,7 @@ import { IntlProvider } from 'react-intl';
 
 import AppProvider from './AppProvider';
 import ProductListProvider from './ProductListProvider';
+import StoreListProvider from './StoreListProvider';
 
 import App from './App';
 
@@ -38,6 +39,12 @@ describe('<AppProvider/>', () => {
 
     it('should have a provider for the product list', () => {
         const provider = component.find(ProductListProvider);
+
+        expect(provider).toHaveLength(1);
+    });
+
+    it('should have a provider for the store list', () => {
+        const provider = component.find(StoreListProvider);
 
         expect(provider).toHaveLength(1);
     });
