@@ -43,8 +43,10 @@ describe('ProductListStore', () => {
 
             store.setProducts(productListMockData);
 
+            /* eslint-disable prefer-destructuring */
             adaptedProduct = store.productList[0];
             originalProduct = productListMockData[0];
+            /* eslint-enable */
         });
 
         it('should fetch the products', () => {
@@ -77,7 +79,6 @@ describe('ProductListStore', () => {
         });
 
         it('should adapt the product detail values', () => {
-
             expect(store.productList).toHaveLength(productListMockData.length);
             expect(adaptedProduct.productPackage).toEqual(originalProduct.package);
             expect(adaptedProduct.style).toEqual(originalProduct.style);
