@@ -99,7 +99,7 @@ export function getAdaptedStore(overrides) {
         addressLine1: chance.sentence(),
         addressLine2: chance.sentence(),
         city: chance.city(),
-        distance: chance.natural,
+        distance: chance.natural(),
         fax: chance.phone(),
         hasBeerColdRoom: chance.bool(),
         hasParking: chance.bool(),

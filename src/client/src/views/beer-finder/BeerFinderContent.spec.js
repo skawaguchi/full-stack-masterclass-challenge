@@ -8,6 +8,7 @@ import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 import BeerFinderContent from './BeerFinderContent';
 
 import CloseLink from '../../components/CloseLink';
+import StoreListTableRows from './StoreListTableRows';
 
 import { Stores } from '../../stores/index';
 
@@ -20,14 +21,16 @@ describe('<BeerFinderContent/>', () => {
     let store;
     let productMock;
     let storeMock;
+    let sortedStoreList;
 
     function renderWrappedComponent() {
+        sortedStoreList = [{}];
+
         const productStoreMock = {
             getProductName: sandbox.stub()
         };
         const storeStoreMock = {
-            fetchStores: () => {},
-            storeList: [storeMock]
+            getStoresByDistance: () => sortedStoreList
         };
 
         productStoreMock.getProductName.returns(productMock.name);
@@ -94,6 +97,28 @@ describe('<BeerFinderContent/>', () => {
 
             expect(label.text()).toEqual('You searched for:');
             expect(name.text()).toEqual(productMock.name);
+        });
+
+        it('should have a table for the store data', () => {
+            const table = component.find('table');
+
+            expect(table.hasClass('store-list')).toBe(true);
+        });
+
+        it('should have a table header', () => {
+            const head = component.find('thead');
+            const row = head.find('tr');
+            const headerCells = row.find('th');
+
+            expect(head).toHaveLength(1);
+            expect(row).toHaveLength(1);
+            expect(headerCells).toHaveLength(6);
+        });
+
+        it('should have a table body', () => {
+            const body = component.find(StoreListTableRows);
+
+            expect(body.props().storeList).toEqual(sortedStoreList);
         });
     });
 });

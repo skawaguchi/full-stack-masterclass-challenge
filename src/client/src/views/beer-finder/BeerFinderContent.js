@@ -6,6 +6,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import CloseLink from '../../components/CloseLink';
+import StoreListTableRows from './StoreListTableRows';
 
 import './BeerFinderContent.css';
 
@@ -14,6 +15,7 @@ import './BeerFinderContent.css';
 class BeerFinderContent extends Component {
     render() {
         const productName = this.props.productListStore.getProductName(this.props.productId);
+        const storeList = this.props.storeListStore.getStoresByDistance();
 
         return (
             <section className="beer-finder">
@@ -26,6 +28,19 @@ class BeerFinderContent extends Component {
                     <span className="search-label">{ 'You searched for:' }</span>
                     <span className="product-name">{ productName }</span>
                 </h1>
+                <table className="store-list">
+                    <thead>
+                        <tr>
+                            <th>{'Distance'}</th>
+                            <th>{'In Stock'}</th>
+                            <th>{'Store Info'}</th>
+                            <th>{'Hours'}</th>
+                            <th>{'Telephone'}</th>
+                            <th>{'Directions'}</th>
+                        </tr>
+                    </thead>
+                    <StoreListTableRows storeList={ storeList }/>
+                </table>
             </section>
         );
     }
@@ -35,6 +50,9 @@ BeerFinderContent.wrappedComponent.propTypes = {
     productId: PropTypes.string.isRequired,
     productListStore: PropTypes.shape({
         getProductName: PropTypes.func.isRequired
+    }),
+    storeListStore: PropTypes.shape({
+        getStoresByDistance: PropTypes.func.isRequired
     })
 };
 
