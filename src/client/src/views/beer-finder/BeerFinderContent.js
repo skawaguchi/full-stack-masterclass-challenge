@@ -6,7 +6,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 import CloseLink from '../../components/CloseLink';
-import StoreListTableRows from './StoreListTableRows';
+import StoreListTable from './StoreListTable';
 
 import './BeerFinderContent.css';
 
@@ -34,19 +34,19 @@ class BeerFinderContent extends Component {
                         value={ this.props.storeListStore.postalCode }
                     />
                 </div>
-                <table className="store-list">
-                    <thead>
-                        <tr>
-                            <th>{'Distance'}</th>
-                            <th>{'In Stock'}</th>
-                            <th>{'Store Info'}</th>
-                            <th>{'Hours'}</th>
-                            <th>{'Telephone'}</th>
-                            <th>{'Directions'}</th>
-                        </tr>
-                    </thead>
-                    <StoreListTableRows storeList={ this.props.storeListStore.storeList }/>
-                </table>
+                {
+                    this.props.storeListStore.storeList.length > 0 ?
+                        <StoreListTable
+                            postalCode={ this.props.storeListStore.postalCode }
+                            storeList={ this.props.storeListStore.storeList }
+                        /> :
+                        <div className="no-stores-message">
+                            {
+                                'Oh noes! We couldn\'t find a store with this beer!'
+                            }
+                        </div>
+                }
+
             </section>
         );
     }

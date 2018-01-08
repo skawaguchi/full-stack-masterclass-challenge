@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 import { FormattedNumber } from 'react-intl';
 
 import StoreListTableRowItem from './StoreListTableRowItem';
 
 import { getAdaptedStore } from '../../mockUtils';
+
+const sandbox = sinon.sandbox.create();
 
 describe('<StoreListTableRowItem/>', () => {
     let component;
@@ -15,13 +15,18 @@ describe('<StoreListTableRowItem/>', () => {
 
     function renderComponent(overrides) {
         props = Object.freeze({
-            item: getAdaptedStore(overrides)
+            item: getAdaptedStore(overrides),
+            postalCode: 'some code'
         });
 
         component = shallow(
             <StoreListTableRowItem {...props}/>
         );
     }
+
+    afterEach(() => {
+        sandbox.restore();
+    });
 
     describe('Given the component renders', () => {
         beforeEach(() => {
@@ -64,10 +69,37 @@ describe('<StoreListTableRowItem/>', () => {
             expect(container).toHaveLength(1);
         });
 
-        it('should display the phone', () => {
+        it('should display the phone number', () => {
             const container = component.find('td.telephone');
 
             expect(container.text()).toContain(props.item.telephone);
+        });
+
+        it('should have a button to get directions', () => {
+            const container = component.find('td.directions');
+            const button = container.find('button');
+
+            expect(container).toHaveLength(1);
+            expect(button.text()).toEqual('Get Directions');
+        });
+
+        describe('when the directions button is clicked', () => {
+            it('should get directions in a new browser tab', () => {
+                const domain = 'https://www.google.com';
+                const path = 'maps/dir';
+                const userLocation = props.postalCode;
+                const address = `${props.item.addressLine1} ${props.item.addressLine1} ${props.item.city} Ontario ${props.item.postalCode}`;
+                const fullPath = `${domain}/${path}/${userLocation}/${address}`;
+
+                const button = component.find('td.directions button');
+
+                const openStub = sandbox.stub(window, 'open');
+
+                button.simulate('click');
+
+                sinon.assert.calledOnce(openStub);
+                sinon.assert.calledWithExactly(openStub, fullPath, 'directions');
+            });
         });
     });
 

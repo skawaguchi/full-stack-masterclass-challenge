@@ -13,6 +13,7 @@ describe('<StoreListTableRows/>', () => {
 
     function renderComponent(overrides) {
         props = Object.freeze({
+            postalCode: 'some code',
             storeList: [
                 getAdaptedStore()
             ],
@@ -40,6 +41,7 @@ describe('<StoreListTableRows/>', () => {
 
             rowItems.forEach((item, index) => {
                 expect(item.props().item).toEqual(props.storeList[index]);
+                expect(item.props().postalCode).toEqual(props.postalCode);
             });
         });
     });

@@ -1,11 +1,22 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 import { FormattedNumber } from 'react-intl';
 
 function getAttribute(value) {
     return value !== null ? <div>{ value }</div> : null;
+}
+
+function getDirectionClickHandler(props) {
+    return () => {
+        const domain = 'https://www.google.com';
+        const path = 'maps/dir';
+        const userLocation = props.postalCode;
+        const address = `${props.item.addressLine1} ${props.item.addressLine1}`;
+        const fullAddress = `${address} ${props.item.city} Ontario ${props.item.postalCode}`;
+        const fullPath = `${domain}/${path}/${userLocation}/${fullAddress}`;
+
+        window.open(fullPath, 'directions');
+    };
 }
 
 function StoreListTableRowItem(props) {
@@ -36,6 +47,9 @@ function StoreListTableRowItem(props) {
             <td className="telephone">
                 { getAttribute(props.item.telephone) }
             </td>
+            <td className="directions">
+                <button onClick={ getDirectionClickHandler(props) }>{'Get Directions'}</button>
+            </td>
         </tr>
     );
 }
@@ -43,7 +57,8 @@ function StoreListTableRowItem(props) {
 StoreListTableRowItem.propTypes = {
     item: PropTypes.shape({
         distance: PropTypes.number.isRequired
-    })
+    }),
+    postalCode: PropTypes.string.isRequired
 };
 
 export default StoreListTableRowItem;

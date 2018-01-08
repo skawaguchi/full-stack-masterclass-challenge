@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { PropTypes as MobXPropTypes } from 'mobx-react';
 
 import StoreListTableRowItem from './StoreListTableRowItem';
@@ -11,6 +12,7 @@ function StoreListTableRow(props) {
                     <StoreListTableRowItem
                         item={ item }
                         key={ item.id }
+                        postalCode={ props.postalCode }
                     />)
             }
         </tbody>
@@ -18,6 +20,7 @@ function StoreListTableRow(props) {
 }
 
 StoreListTableRow.propTypes = {
+    postalCode: PropTypes.string.isRequired,
     storeList: MobXPropTypes.arrayOrObservableArray.isRequired
 };
 

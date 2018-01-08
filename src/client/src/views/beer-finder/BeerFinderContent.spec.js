@@ -8,7 +8,7 @@ import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
 import BeerFinderContent from './BeerFinderContent';
 
 import CloseLink from '../../components/CloseLink';
-import StoreListTableRows from './StoreListTableRows';
+import StoreListTable from './StoreListTable';
 
 import { Stores } from '../../stores/index';
 
@@ -25,7 +25,6 @@ describe('<BeerFinderContent/>', () => {
     let sortedStoreList;
 
     function renderWrappedComponent() {
-        sortedStoreList = [{}];
 
         const productStoreMock = {
             getProductName: sandbox.stub()
@@ -69,6 +68,8 @@ describe('<BeerFinderContent/>', () => {
 
     describe('Given stores are loaded', () => {
         beforeEach(() => {
+            sortedStoreList = [{}];
+
             setupMockStore();
 
             renderWrappedComponent();
@@ -81,6 +82,31 @@ describe('<BeerFinderContent/>', () => {
 
         it('should have a close link', () => {
             expect(component.find(CloseLink)).toHaveLength(1);
+        });
+
+        describe('and stores were found', () => {
+            it('should have a table for the stores', () => {
+                const table = component.find(StoreListTable);
+
+                expect(table.props().postalCode).toEqual(postalCodeMock);
+                expect(table.props().storeList).toEqual(sortedStoreList);
+            });
+        });
+
+        describe('and no stores were found', () => {
+            it('should display a message and not show the table', () => {
+                sortedStoreList = [];
+
+                setupMockStore();
+
+                renderWrappedComponent();
+
+                const table = component.find(StoreListTable);
+                const message = component.find('div.no-stores-message');
+
+                expect(table).toHaveLength(0);
+                expect(message.text().length).toBeGreaterThan(0);
+            });
         });
 
         it('should have a link to the details page', () => {
@@ -101,28 +127,6 @@ describe('<BeerFinderContent/>', () => {
 
             expect(label.text()).toEqual('You searched for');
             expect(name.text()).toEqual(productMock.name);
-        });
-
-        it('should have a table for the store data', () => {
-            const table = component.find('table');
-
-            expect(table.hasClass('store-list')).toBe(true);
-        });
-
-        it('should have a table header', () => {
-            const head = component.find('thead');
-            const row = head.find('tr');
-            const headerCells = row.find('th');
-
-            expect(head).toHaveLength(1);
-            expect(row).toHaveLength(1);
-            expect(headerCells).toHaveLength(6);
-        });
-
-        it('should have a table body', () => {
-            const body = component.find(StoreListTableRows);
-
-            expect(body.props().storeList).toEqual(sortedStoreList);
         });
 
         it('should have a controls container with the postal code input', () => {
@@ -146,8 +150,6 @@ describe('<BeerFinderContent/>', () => {
                 };
 
                 input.simulate('change', event);
-
-
             });
         });
     });
