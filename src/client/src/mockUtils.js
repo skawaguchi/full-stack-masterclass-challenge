@@ -94,6 +94,53 @@ export function getStore(overrides) {
     };
 }
 
+export function getAdaptedStore(overrides) {
+    return {
+        addressLine1: chance.sentence(),
+        addressLine2: chance.sentence(),
+        city: chance.city(),
+        distance: chance.natural,
+        fax: chance.phone(),
+        hasBeerColdRoom: chance.bool(),
+        hasParking: chance.bool(),
+        hasTransitAccess: chance.bool(),
+        hasWheelchairAccess: chance.bool(),
+        id: chance.natural(),
+        postalCode: chance.postal(),
+        quantity: chance.natural(),
+        telephone: chance.phone(),
+        sunday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        monday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        tuesday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        wednesday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        thursday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        friday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        saturday: {
+            close: chance.natural({ min: 0, max: 1440}),
+            open: chance.natural({ min: 0, max: 1440})
+        },
+        ...overrides
+    };
+}
+
 class MockReactClass extends Component {
     render() {
         return (
