@@ -25,7 +25,7 @@ describe('StoreListStore', () => {
 
     describe('Initialization', () => {
         it('should default the product list to empty', () => {
-            expect(store.storeList).toHaveLength(0);
+            expect(store.storeList).toBe(null);
         });
     });
 
@@ -63,6 +63,7 @@ describe('StoreListStore', () => {
 
             it('should fetch the stores', () => {
                 const productId = 'someId';
+                const postalCode = 'some code';
 
                 getStoresStub.returns(Promise.resolve({
                     data: {
@@ -72,14 +73,16 @@ describe('StoreListStore', () => {
                     }
                 }));
 
-                store.fetchStores(productId);
+                store.fetchStores(productId, postalCode);
 
                 sinon.assert.calledOnce(getStoresStub);
-                sinon.assert.calledWithExactly(getStoresStub, productId);
+                sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
             });
 
             describe('when fetching the stores is successful', () => {
                 it('should update the store with the fetched stores', async () => {
+                    const productId = 'someId';
+                    const postalCode = 'some code';
                     const storeMock = getStore();
                     const expectedResults = {
                         data: {
@@ -91,7 +94,7 @@ describe('StoreListStore', () => {
 
                     getStoresStub.returns(Promise.resolve(expectedResults));
 
-                    await store.fetchStores();
+                    await store.fetchStores(productId, postalCode);
 
                     expect(store.storeList).toHaveLength(expectedResults.data.result.length);
                 });

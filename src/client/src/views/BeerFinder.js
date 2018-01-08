@@ -10,11 +10,11 @@ function BeerFinder(props) {
 
     return (
         <ProductListContainer>
-            <StoreListContainer productId={ productId }>
-                <PostalCodeContainer>
+            <PostalCodeContainer>
+                <StoreListContainer productId={ productId }>
                     <BeerFinderContent productId={ productId }/>
-                </PostalCodeContainer>
-            </StoreListContainer>
+                </StoreListContainer>
+            </PostalCodeContainer>
         </ProductListContainer>
     );
 }

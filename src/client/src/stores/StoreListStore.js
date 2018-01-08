@@ -7,7 +7,7 @@ import { getStores } from '../repositories/Stores';
 import { getGeo } from '../repositories/Geo';
 
 class StoreListStore {
-    @observable storeList = [];
+    @observable storeList = null;
     @observable postalCode = null;
 
     getStoresByDistance() {
@@ -41,9 +41,9 @@ class StoreListStore {
     }
 
     @action
-    async fetchStores(productId) {
+    async fetchStores(productId, postalCode) {
         try {
-            const stores = await getStores(productId);
+            const stores = await getStores(productId, postalCode);
 
             this.setStores(stores.data.result);
         } catch (err) {

@@ -11,3 +11,11 @@
     padding-left: 5px;
 }
 
+.beer-finder .search-label::after {
+    content: ":";
+}
+
+.beer-finder .controls input {
+    font-size: 1rem;
+    margin-left: 10px;
+}

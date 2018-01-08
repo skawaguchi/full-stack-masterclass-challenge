@@ -17,6 +17,7 @@ describe('<StoreListContainer/>', () => {
     let component;
     let store;
     let productIdMock;
+    let postalCodeMock;
     let MockReactClass;
 
     function renderMountedComponent() {
@@ -46,7 +47,10 @@ describe('<StoreListContainer/>', () => {
     beforeEach(() => {
         store = Stores.storeListStore;
 
+        postalCodeMock = 'some code';
         productIdMock = 'someId';
+
+        store.postalCode = postalCodeMock;
 
         sandbox.stub(store, 'fetchStores');
 
@@ -60,7 +64,7 @@ describe('<StoreListContainer/>', () => {
     describe('Given the component renders', () => {
         describe('and there are no stores', () => {
             it('should show the loader', () => {
-                store.storeList = [];
+                store.storeList = null;
 
                 renderWrappedComponent();
 
@@ -81,12 +85,12 @@ describe('<StoreListContainer/>', () => {
     describe('Given the component is rendered with a store', () => {
         describe('when the component mounts', () => {
             it('should load the store list', () => {
-                store.storeList = [];
+                store.storeList = null;
 
                 renderMountedComponent();
 
                 sinon.assert.calledOnce(store.fetchStores);
-                sinon.assert.calledWithExactly(store.fetchStores, productIdMock);
+                sinon.assert.calledWithExactly(store.fetchStores, productIdMock, postalCodeMock);
             });
         });
     });

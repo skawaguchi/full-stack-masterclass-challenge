@@ -19,6 +19,7 @@ const sandbox = sinon.sandbox.create();
 describe('<BeerFinderContent/>', () => {
     let component;
     let store;
+    let postalCodeMock;
     let productMock;
     let storeMock;
     let sortedStoreList;
@@ -30,6 +31,7 @@ describe('<BeerFinderContent/>', () => {
             getProductName: sandbox.stub()
         };
         const storeStoreMock = {
+            postalCode: postalCodeMock,
             getStoresByDistance: () => sortedStoreList
         };
 
@@ -46,6 +48,8 @@ describe('<BeerFinderContent/>', () => {
 
     function setupMockStore(overrides) {
         store = Stores;
+
+        postalCodeMock = 'some postal code';
 
         storeMock = getAdaptedStore(overrides);
         productMock = getAdaptedProduct();
@@ -95,7 +99,7 @@ describe('<BeerFinderContent/>', () => {
             const label = header.find('span.search-label');
             const name = header.find('span.product-name');
 
-            expect(label.text()).toEqual('You searched for:');
+            expect(label.text()).toEqual('You searched for');
             expect(name.text()).toEqual(productMock.name);
         });
 
@@ -119,6 +123,32 @@ describe('<BeerFinderContent/>', () => {
             const body = component.find(StoreListTableRows);
 
             expect(body.props().storeList).toEqual(sortedStoreList);
+        });
+
+        it('should have a controls container with the postal code input', () => {
+            const controls = component.find('div.controls');
+            const label = controls.find('span');
+            const input = controls.find('input');
+
+            expect(controls).toHaveLength(1);
+            expect(label.text()).toEqual('Search by Postal Code');
+            expect(input.props().type).toEqual('text');
+            expect(input.props().value).toEqual(postalCodeMock);
+        });
+
+        describe('when the postal code is changed', () => {
+            it('should query the stores again', () => {
+                const input = component.find('div.controls input');
+                const event = {
+                    target: {
+                        value: 'some change'
+                    }
+                };
+
+                input.simulate('change', event);
+
+
+            });
         });
     });
 });

@@ -21,15 +21,18 @@ describe('Stores repository', () => {
     });
 
     it('should call the list of stores that has a specific product', () => {
-        const expectedProductId = 'someId';
+        const postalCode = 'some code';
+        const productId = 'someId';
         const repoUrl = 'http://lcboapi.com/stores';
         const expectedOptions = {
             headers: {
                 Authorization: `token ${repoKey}`
             },
             params: {
+                geo: postalCode,
+                order: 'distance_in_meters',
                 per_page: 100,
-                product_id: expectedProductId
+                product_id: productId
             }
         };
 
@@ -39,7 +42,7 @@ describe('Stores repository', () => {
 
         getStub.returns(Promise.resolve(responseMockData));
 
-        storesRepo.getStores(expectedProductId);
+        storesRepo.getStores(productId, postalCode);
 
         sinon.assert.calledOnce(getStub);
         sinon.assert.calledWithExactly(getStub, repoUrl, expectedOptions);

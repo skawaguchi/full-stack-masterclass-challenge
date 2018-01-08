@@ -8,11 +8,13 @@ import Loader from '../components/Loader';
 @observer
 class StoreListContainer extends Component {
     componentDidMount() {
-        this.props.storeListStore.fetchStores(this.props.productId);
+        const { postalCode } = this.props.storeListStore;
+
+        this.props.storeListStore.fetchStores(this.props.productId, postalCode);
     }
 
     render() {
-        const hasStores = this.props.storeListStore.storeList.length > 0;
+        const hasStores = this.props.storeListStore.storeList !== null;
 
         return (
             hasStores ? this.props.children : <Loader/>
@@ -22,7 +24,10 @@ class StoreListContainer extends Component {
 
 StoreListContainer.propTypes = {
     children: PropTypes.node.isRequired,
-    productId: PropTypes.string.isRequired
+    productId: PropTypes.string.isRequired,
+    storeListStore: PropTypes.shape({
+        fetchStores: PropTypes.func.isRequired
+    })
 };
 
 export default StoreListContainer;

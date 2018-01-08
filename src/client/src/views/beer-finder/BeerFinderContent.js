@@ -25,9 +25,16 @@ class BeerFinderContent extends Component {
                     <span className="back-label">{ 'Back to Product Details' }</span>
                 </Link>
                 <h1>
-                    <span className="search-label">{ 'You searched for:' }</span>
+                    <span className="search-label">{ 'You searched for' }</span>
                     <span className="product-name">{ productName }</span>
                 </h1>
+                <div className="controls">
+                    <span className="search-label">{ 'Search by Postal Code' }</span>
+                    <input
+                        type="text"
+                        value={ this.props.storeListStore.postalCode }
+                    />
+                </div>
                 <table className="store-list">
                     <thead>
                         <tr>
