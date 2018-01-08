@@ -4,9 +4,11 @@ import {
 } from 'mobx';
 
 import { getStores } from '../repositories/Stores';
+import { getGeo } from '../repositories/Geo';
 
 class StoreListStore {
     @observable storeList = [];
+    @observable postalCode = null;
 
     getStoresByDistance() {
         return this.storeList.sort((a, b) => a.distance > b.distance);
@@ -44,6 +46,16 @@ class StoreListStore {
             const stores = await getStores(productId);
 
             this.setStores(stores.data.result);
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+
+    @action async fetchGeo() {
+        try {
+            const geo = await getGeo();
+
+            this.postalCode = geo.data.result.postal_code;
         } catch (err) {
             throw new Error(err);
         }

@@ -4,6 +4,7 @@ import StoreListStore from './StoreListStore';
 
 import { getStore } from '../mockUtils';
 import * as storesRepository from '../repositories/Stores';
+import * as geoRepository from '../repositories/Geo';
 
 const sandbox = sinon.sandbox.create();
 
@@ -31,6 +32,7 @@ describe('StoreListStore', () => {
     describe('Fetching and adapting data', () => {
         let storeListMockData;
         let getStoresStub;
+        let getGeoStub;
         let adaptedStore;
         let originalStore;
 
@@ -51,6 +53,7 @@ describe('StoreListStore', () => {
 
         beforeEach(() => {
             getStoresStub = sandbox.stub(storesRepository, 'getStores');
+            getGeoStub = sandbox.stub(geoRepository, 'getGeo');
         });
 
         describe('Given any store data', () => {
@@ -172,6 +175,42 @@ describe('StoreListStore', () => {
             expect(sortedList[0].id).toEqual('second');
             expect(sortedList[1].id).toEqual('third');
             expect(sortedList[2].id).toEqual('first');
+        });
+
+        describe('when fetching the postal code is successful', () => {
+            it('should update the store with the fetched postal code', async () => {
+                const postalCodeMock = 'some postal code';
+                const expectedResults = {
+                    data: {
+                        result: {
+                            postal_code: postalCodeMock
+                        }
+                    }
+                };
+
+                getGeoStub.returns(Promise.resolve(expectedResults));
+
+                await store.fetchGeo();
+
+                expect(store.postalCode).toEqual(postalCodeMock);
+            });
+        });
+
+        describe('When fetching the postal code fails', () => {
+            it('should throw an error', async () => {
+                expect.assertions(1);
+
+                const expectedError = 'some error';
+
+                getGeoStub
+                    .returns(Promise.reject(expectedError));
+
+                try {
+                    await store.fetchGeo();
+                } catch (err) {
+                    expect(err).toEqual(new Error(expectedError));
+                }
+            });
         });
     });
 });
