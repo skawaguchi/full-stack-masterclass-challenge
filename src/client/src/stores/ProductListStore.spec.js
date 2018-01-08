@@ -31,6 +31,8 @@ describe('ProductListStore', () => {
     describe('Fetching and adapting data', () => {
         let productListMockData;
         let getProductsStub;
+        let adaptedProduct;
+        let originalProduct;
 
         beforeEach(() => {
             getProductsStub = sandbox.stub(productRepository, 'getProducts');
@@ -40,22 +42,9 @@ describe('ProductListStore', () => {
             ];
 
             store.setProducts(productListMockData);
-        });
 
-        it('should set the product list and adapt the necessary values', () => {
-            const adaptedProduct = store.productList[0];
-            const originalProduct = productListMockData[0];
-
-            expect(store.productList).toHaveLength(productListMockData.length);
-            expect(adaptedProduct.id).toEqual(originalProduct.id.toString());
-            expect(adaptedProduct.imageUrl).toEqual(originalProduct.image_url);
-            expect(adaptedProduct.imageThumbUrl).toEqual(originalProduct.image_thumb_url);
-            expect(adaptedProduct.name).toEqual(originalProduct.name);
-            expect(adaptedProduct.productPackage).toEqual(originalProduct.package);
-            expect(adaptedProduct.price).toEqual(originalProduct.price_in_cents / 100);
-            expect(adaptedProduct.style).toEqual(originalProduct.style);
-            expect(adaptedProduct.tastingNote).toEqual(originalProduct.tasting_note);
-            expect(adaptedProduct.varietal).toEqual(originalProduct.varietal);
+            adaptedProduct = store.productList[0];
+            originalProduct = productListMockData[0];
         });
 
         it('should fetch the products', () => {
@@ -70,6 +59,30 @@ describe('ProductListStore', () => {
             store.fetchProducts();
 
             sinon.assert.calledOnce(getProductsStub);
+        });
+
+        it('should set the product list and adapt the necessary values', () => {
+            expect(store.productList).toHaveLength(productListMockData.length);
+        });
+
+        it('should adapt the product values', () => {
+            expect(adaptedProduct.id).toEqual(originalProduct.id.toString());
+            expect(adaptedProduct.name).toEqual(originalProduct.name);
+            expect(adaptedProduct.price).toEqual(originalProduct.price_in_cents / 100);
+        });
+
+        it('should adapt the image values', () => {
+            expect(adaptedProduct.imageUrl).toEqual(originalProduct.image_url);
+            expect(adaptedProduct.imageThumbUrl).toEqual(originalProduct.image_thumb_url);
+        });
+
+        it('should adapt the product detail values', () => {
+
+            expect(store.productList).toHaveLength(productListMockData.length);
+            expect(adaptedProduct.productPackage).toEqual(originalProduct.package);
+            expect(adaptedProduct.style).toEqual(originalProduct.style);
+            expect(adaptedProduct.tastingNote).toEqual(originalProduct.tasting_note);
+            expect(adaptedProduct.varietal).toEqual(originalProduct.varietal);
         });
 
         describe('When fetching the products is successful', () => {
@@ -114,7 +127,7 @@ describe('ProductListStore', () => {
         });
     });
 
-    describe('Accessing the store', () => {
+    describe('Accessing view-specific values', () => {
         let productListMockData;
         let getProductsStub;
 
