@@ -22,7 +22,7 @@ function ProductListItem(props) {
 
 ProductListItem.propTypes = {
     id: PropTypes.string.isRequired,
-    imagePath: PropTypes.string.isRequired,
+    imagePath: PropTypes.string,
     name: PropTypes.string.isRequired
 };
 

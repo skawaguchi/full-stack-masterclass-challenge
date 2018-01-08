@@ -33,7 +33,7 @@ function ProductList(props) {
 ProductList.propTypes = {
     productListItems: PropTypes.arrayOf(
         PropTypes.shape({
-            imagePath: PropTypes.string.isRequired,
+            imagePath: PropTypes.string,
             name: PropTypes.string.isRequired
         })
     )
