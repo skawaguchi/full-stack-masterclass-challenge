@@ -14,7 +14,7 @@ class PostalCodeContainer extends Component {
     }
 
     render() {
-        const hasPostalCode = this.props.storeListStore.postalCode;
+        const hasPostalCode = this.props.storeListStore.postalCode !== null;
 
         return (
             hasPostalCode ? this.props.children : <Loader/>

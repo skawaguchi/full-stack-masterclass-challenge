@@ -148,7 +148,7 @@ describe('StoreListStore', () => {
                 });
             });
 
-            describe('When fetching the stores fails', () => {
+            describe('when fetching the stores fails', () => {
                 it('should throw an error', async () => {
                     expect.assertions(1);
 
@@ -162,6 +162,70 @@ describe('StoreListStore', () => {
                     } catch (err) {
                         expect(err).toEqual(new Error(expectedError));
                     }
+                });
+            });
+
+            describe('when changing the postal code', () => {
+                let productId;
+                let postalCode;
+
+                beforeEach(() => {
+                    productId = 'someId';
+                });
+
+                describe('and the input is not a valid postal code', () => {
+                    it('should not call the store search with a breaking pattern', () => {
+                        postalCode = 'xxx';
+
+                        store.refreshStores(productId, postalCode);
+                        expect(store.postalCode).toEqual(postalCode);
+
+                        sinon.assert.notCalled(getStoresStub);
+                    });
+
+                    it('should not call the store search with a partially matching pattern', () => {
+                        postalCode = 'a1a1';
+
+                        store.refreshStores(productId, postalCode);
+                        expect(store.postalCode).toEqual(postalCode);
+
+                        sinon.assert.notCalled(getStoresStub);
+                    });
+                });
+
+                describe('and the input is longer than a valid postal code', () => {
+                    it('should not call the store search', () => {
+                        postalCode = 'A1A 1A1A';
+
+                        store.refreshStores(productId, postalCode);
+                        expect(store.postalCode).toEqual(postalCode);
+
+                        sinon.assert.notCalled(getStoresStub);
+                    });
+                });
+
+                describe('and the input is a valid full postal code', () => {
+                    it('should call the store search', () => {
+                        postalCode = 'A1A1A1';
+
+                        store.refreshStores(productId, postalCode);
+                        expect(store.postalCode).toEqual(postalCode);
+
+                        sinon.assert.calledOnce(getStoresStub);
+                        sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
+                    });
+                });
+
+                describe('and the input is a valid abbreviated postal code', () => {
+                    it('should call the store search', () => {
+                        postalCode = 'A1A';
+
+                        store.refreshStores(productId, postalCode);
+                        expect(store.postalCode).toEqual(postalCode);
+
+                        sinon.assert.calledOnce(getStoresStub);
+                        sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
+                    });
                 });
             });
         });

@@ -23,14 +23,17 @@ describe('<BeerFinderContent/>', () => {
     let productMock;
     let storeMock;
     let sortedStoreList;
+    let productStoreMock;
+    let storeStoreMock;
 
     function renderWrappedComponent() {
 
-        const productStoreMock = {
+        productStoreMock = {
             getProductName: sandbox.stub()
         };
-        const storeStoreMock = {
+        storeStoreMock = {
             postalCode: postalCodeMock,
+            refreshStores: sandbox.stub(),
             storeList: sortedStoreList
         };
 
@@ -136,6 +139,7 @@ describe('<BeerFinderContent/>', () => {
 
             expect(controls).toHaveLength(1);
             expect(label.text()).toEqual('Search by Postal Code');
+            expect(input.props().placeholder).toEqual('A1A 2B2 or A1A');
             expect(input.props().type).toEqual('text');
             expect(input.props().value).toEqual(postalCodeMock);
         });
@@ -143,13 +147,17 @@ describe('<BeerFinderContent/>', () => {
         describe('when the postal code is changed', () => {
             it('should query the stores again', () => {
                 const input = component.find('div.controls input');
+                const changedPostalCode = 'some change';
                 const event = {
                     target: {
-                        value: 'some change'
+                        value: changedPostalCode
                     }
                 };
 
                 input.simulate('change', event);
+
+                sinon.assert.calledOnce(storeStoreMock.refreshStores);
+                sinon.assert.calledWithExactly(storeStoreMock.refreshStores, productMock.id, changedPostalCode);
             });
         });
     });

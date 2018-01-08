@@ -6,6 +6,18 @@ import {
 import { getStores } from '../repositories/Stores';
 import { getGeo } from '../repositories/Geo';
 
+const postalCodeRegEx = /([A-Z]\d[A-Z] ?\d[A-Z]\d)|(^[A-Z]\d[A-Z]$)/;
+const maximumCharacterLength = 6;
+const whiteSpaceRegex = /\s/g;
+
+function isValidPostalCode(postalCode) {
+    const upperCased = postalCode.toUpperCase();
+    const noWhiteSpace = postalCode.replace(whiteSpaceRegex, '');
+
+    return upperCased.match(postalCodeRegEx) !== null &&
+        noWhiteSpace.length <= maximumCharacterLength;
+}
+
 class StoreListStore {
     @observable storeList = null;
     @observable postalCode = null;
@@ -45,6 +57,17 @@ class StoreListStore {
         } catch (err) {
             throw new Error(err);
         }
+    }
+
+    @action
+    async refreshStores(productId, postalCode) {
+        this.postalCode = postalCode;
+
+        if (isValidPostalCode(postalCode)) {
+            return this.fetchStores(productId, postalCode);
+        }
+
+        return null;
     }
 
     @action async fetchGeo() {

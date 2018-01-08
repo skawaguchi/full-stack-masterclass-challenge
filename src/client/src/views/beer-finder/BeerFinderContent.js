@@ -10,6 +10,14 @@ import StoreListTable from './StoreListTable';
 
 import './BeerFinderContent.css';
 
+function getPostalCodeChangeHandler(props) {
+    return (event) => {
+        const newPostalCode = event.target.value;
+
+        props.storeListStore.refreshStores(props.productId, newPostalCode);
+    };
+}
+
 @inject('productListStore', 'storeListStore')
 @observer
 class BeerFinderContent extends Component {
@@ -30,6 +38,8 @@ class BeerFinderContent extends Component {
                 <div className="controls">
                     <span className="search-label">{ 'Search by Postal Code' }</span>
                     <input
+                        onChange={ getPostalCodeChangeHandler(this.props) }
+                        placeholder="A1A 2B2 or A1A"
                         type="text"
                         value={ this.props.storeListStore.postalCode }
                     />
@@ -58,6 +68,8 @@ BeerFinderContent.wrappedComponent.propTypes = {
         getProductName: PropTypes.func.isRequired
     }),
     storeListStore: PropTypes.shape({
+        postalCode: PropTypes.string.isRequired,
+        refreshStores: PropTypes.func.isRequired,
         storeList: MobXPropTypes.arrayOrObservableArray.isRequired
     })
 };
