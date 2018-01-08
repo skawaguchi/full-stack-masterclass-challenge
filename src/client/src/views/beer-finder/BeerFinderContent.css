@@ -7,11 +7,13 @@
     padding-left: 10px;
 }
 
-.beer-finder .back-label {
+.beer-finder .back-label,
+.beer-finder .store-value {
     padding-left: 5px;
 }
 
-.beer-finder .search-label::after {
+.beer-finder .search-label::after,
+.beer-finder .store-label::after {
     content: ":";
 }
 
