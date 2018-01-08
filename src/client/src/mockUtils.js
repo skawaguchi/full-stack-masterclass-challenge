@@ -141,6 +141,12 @@ export function getAdaptedStore(overrides) {
     };
 }
 
+export function getGeo() {
+    return {
+        zip_code: chance.postal().slice(0, 3)
+    };
+}
+
 class MockReactClass extends Component {
     render() {
         return (
