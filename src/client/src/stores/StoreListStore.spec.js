@@ -50,6 +50,8 @@ describe('StoreListStore', () => {
         });
 
         it('should fetch the stores', () => {
+            const productId = 'someId';
+
             getStoresStub.returns(Promise.resolve({
                 data: {
                     result: [
@@ -58,9 +60,10 @@ describe('StoreListStore', () => {
                 }
             }));
 
-            store.fetchStores();
+            store.fetchStores(productId);
 
             sinon.assert.calledOnce(getStoresStub);
+            sinon.assert.calledWithExactly(getStoresStub, productId);
         });
 
         describe('when fetching the stores is successful', () => {

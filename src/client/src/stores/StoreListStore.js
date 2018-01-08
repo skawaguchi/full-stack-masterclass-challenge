@@ -35,9 +35,9 @@ class StoreListStore {
     }
 
     @action
-    async fetchStores() {
+    async fetchStores(productId) {
         try {
-            const stores = await getStores();
+            const stores = await getStores(productId);
 
             this.setStores(stores.data.result);
         } catch (err) {
