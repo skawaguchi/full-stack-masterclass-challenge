@@ -61,6 +61,40 @@ export function getProductListItem(overrides) {
     };
 }
 
+export function getStore(overrides) {
+    return {
+        address_line_1: chance.sentence(),
+        address_line_2: chance.sentence(),
+        city: chance.city(),
+        distance_in_meters: chance.natural,
+        fax: chance.phone(),
+        has_beer_cold_room: chance.bool(),
+        has_parking: chance.bool(),
+        has_transit_access: chance.bool(),
+        has_wheelchair_accessability: chance.bool(),
+        id: chance.natural(),
+        postal_code: chance.postal(),
+        quantity: chance.natural(),
+        telephone: chance.phone(),
+        producer_name: chance.hash(),
+        sunday_open: chance.natural({ min: 0, max: 1440}),
+        sunday_close: chance.natural({ min: 0, max: 1440}),
+        monday_open: chance.natural({ min: 0, max: 1440}),
+        monday_close: chance.natural({ min: 0, max: 1440}),
+        tuesday_open: chance.natural({ min: 0, max: 1440}),
+        tuesday_close: chance.natural({ min: 0, max: 1440}),
+        wednesday_open: chance.natural({ min: 0, max: 1440}),
+        wednesday_close: chance.natural({ min: 0, max: 1440}),
+        thursday_open: chance.natural({ min: 0, max: 1440}),
+        thursday_close: chance.natural({ min: 0, max: 1440}),
+        friday_open: chance.natural({ min: 0, max: 1440}),
+        friday_close: chance.natural({ min: 0, max: 1440}),
+        saturday_open: chance.natural({ min: 0, max: 1440}),
+        saturday_close: chance.natural({ min: 0, max: 1440}),
+        ...overrides
+    };
+}
+
 class MockReactClass extends Component {
     render() {
         return (
