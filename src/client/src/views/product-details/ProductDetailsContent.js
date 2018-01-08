@@ -5,6 +5,7 @@ import { FormattedNumber } from 'react-intl';
 
 import CloseLink from '../../components/CloseLink';
 import ProductImage from '../../components/ProductImage';
+import BeerFinderLink from '../../components/BeerFinderLink';
 
 import './ProductDetailsContent.css';
 
@@ -47,11 +48,14 @@ class ProductDetailsContent extends Component {
                 />
                 <h1>{ product.name }</h1>
                 <dl className="product-details-content">
+                    <div className="beer-finder">
+                        <dt>{ 'Beer Finder' }</dt>
+                        <dd><BeerFinderLink id={ product.id }/></dd>
+                    </div>
                     <div className="product-id">
                         <dt>{ 'Product ID' }</dt>
                         <dd>{ product.id }</dd>
                     </div>
-
                     <div className="price">
                         <dt>{'Price'}</dt>
                         <dd>
@@ -62,7 +66,6 @@ class ProductDetailsContent extends Component {
                             />
                         </dd>
                     </div>
-
                     { getOptionalContent(tastingNoteConfig, product) }
                     { getOptionalContent(varietalConfig, product) }
                     { getOptionalContent(styleConfig, product) }

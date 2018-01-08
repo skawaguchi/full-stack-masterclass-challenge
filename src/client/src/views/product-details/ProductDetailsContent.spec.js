@@ -6,6 +6,7 @@ import ProductDetailsContent from './ProductDetailsContent';
 
 import CloseLink from '../../components/CloseLink';
 import ProductImage from '../../components/ProductImage';
+import BeerFinderLink from '../../components/BeerFinderLink';
 
 import { Stores } from '../../stores/index';
 
@@ -100,6 +101,15 @@ describe('<ProductDetailsContent/>', () => {
                 expect(value.props().currency).toEqual('USD');
                 expect(value.props().style).toEqual('currency');
                 expect(value.props().value).toEqual(productMock.price);
+            });
+
+            it('should have a link to the beer finder', () => {
+                const container = component.find('div.beer-finder');
+                const label = container.find('dt');
+                const link = container.find(BeerFinderLink);
+
+                expect(label.text()).toEqual('Beer Finder');
+                expect(link.props().id).toEqual(productMock.id);
             });
         });
 
