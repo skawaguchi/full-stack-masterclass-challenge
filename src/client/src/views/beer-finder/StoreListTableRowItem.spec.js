@@ -2,6 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FormattedNumber } from 'react-intl';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {
+    faBeer,
+    faBus,
+    faCar,
+    faWheelchair
+} from '@fortawesome/fontawesome-free-solid';
 
 import StoreListTableRowItem from './StoreListTableRowItem';
 
@@ -115,6 +122,68 @@ describe('<StoreListTableRowItem/>', () => {
             const container = component.find('td.store-info');
 
             expect(container.text()).not.toContain(props.item.addressLine2);
+        });
+    });
+
+    describe('Store Info Icons', () => {
+        function testForIcon(config) {
+            describe(`Given there is ${config.testId}`, () => {
+                it('should display an icon', () => {
+                    renderComponent({
+                        [config.dataAttribute]: true
+                    });
+
+                    const container = component.find(`span.${config.containerId}`);
+                    const icon = container.find(FontAwesomeIcon);
+
+                    expect(container.props().title).toEqual(config.titleText);
+                    expect(icon.props().icon).toEqual(config.iconId);
+                });
+            });
+
+            describe('Given there is not wheelchair access', () => {
+                it('should not display an icon', () => {
+                    renderComponent({
+                        [config.dataAttribute]: false
+                    });
+
+                    const container = component.find(`span.${config.containerId}`);
+
+                    expect(container).toHaveLength(0);
+                });
+            });
+        }
+
+        testForIcon({
+            dataAttribute: 'hasWheelchairAccess',
+            iconId: faWheelchair,
+            containerId: 'wheelchair-access',
+            testId: 'wheelchair access',
+            titleText: 'This location has wheelchair access'
+        });
+
+        testForIcon({
+            dataAttribute: 'hasParking',
+            iconId: faCar,
+            containerId: 'parking',
+            testId: 'parking',
+            titleText: 'This location has parking'
+        });
+
+        testForIcon({
+            dataAttribute: 'hasTransitAccess',
+            iconId: faBus,
+            containerId: 'transit-access',
+            testId: 'transit access',
+            titleText: 'This location has transit access'
+        });
+
+        testForIcon({
+            dataAttribute: 'hasBeerColdRoom',
+            iconId: faBeer,
+            containerId: 'beer-cold-room',
+            testId: 'a beer code room',
+            titleText: 'This location has a beer cold room'
         });
     });
 });

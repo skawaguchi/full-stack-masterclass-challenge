@@ -1,6 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedNumber } from 'react-intl';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {
+    faBeer,
+    faBus,
+    faCar,
+    faWheelchair
+} from '@fortawesome/fontawesome-free-solid';
 
 import StoreHours from './StoreHours';
 
@@ -19,6 +26,48 @@ function getDirectionClickHandler(props) {
 
         window.open(fullPath, 'directions');
     };
+}
+
+const iconMap = {
+    beerColdRoom: {
+        className: 'beer-cold-room',
+        icon: faBeer,
+        titleText: 'This location has a beer cold room'
+    },
+    parking: {
+        className: 'parking',
+        icon: faCar,
+        titleText: 'This location has parking'
+    },
+    transitAccess: {
+        className: 'transit-access',
+        icon: faBus,
+        titleText: 'This location has transit access'
+    },
+    wheelchairAccess: {
+        className: 'wheelchair-access',
+        icon: faWheelchair,
+        titleText: 'This location has wheelchair access'
+    }
+};
+
+function getIcon(hasIcon, key) {
+    const {
+        className,
+        icon,
+        titleText
+    } = iconMap[key];
+
+    return hasIcon ?
+        <span
+            className={ className }
+            title={ titleText }
+        >
+            <FontAwesomeIcon
+                icon={ icon}
+            />
+        </span> :
+        null;
 }
 
 function StoreListTableRowItem(props) {
@@ -43,6 +92,12 @@ function StoreListTableRowItem(props) {
                 <div>
                     <span className="store-label">{'Store #'}</span>
                     <span className="store-value">{ props.item.id }</span>
+                </div>
+                <div className="icons">
+                    { getIcon(props.item.hasWheelchairAccess, 'wheelchairAccess') }
+                    { getIcon(props.item.hasTransitAccess, 'transitAccess') }
+                    { getIcon(props.item.hasParking, 'parking') }
+                    { getIcon(props.item.hasBeerColdRoom, 'beerColdRoom') }
                 </div>
             </td>
             <td className="hours">
