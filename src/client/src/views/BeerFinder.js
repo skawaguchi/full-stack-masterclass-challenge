@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import ProductListContainer from './ProductListContainer';
 import StoreListContainer from './StoreListContainer';
@@ -18,4 +19,9 @@ function BeerFinder(props) {
         </ProductListContainer>
     );
 }
+
+BeerFinder.propTypes = {
+    match: PropTypes.object.isRequired
+};
+
 export default BeerFinder;

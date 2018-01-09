@@ -130,10 +130,9 @@ describe('ProductListStore', () => {
 
     describe('Accessing view-specific values', () => {
         let productListMockData;
-        let getProductsStub;
 
         beforeEach(() => {
-            getProductsStub = sandbox.stub(productRepository, 'getProducts');
+            sandbox.stub(productRepository, 'getProducts');
 
             productListMockData = [
                 getAdaptedProduct(),

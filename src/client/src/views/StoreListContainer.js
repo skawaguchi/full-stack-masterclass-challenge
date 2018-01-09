@@ -26,7 +26,9 @@ StoreListContainer.propTypes = {
     children: PropTypes.node.isRequired,
     productId: PropTypes.string.isRequired,
     storeListStore: PropTypes.shape({
-        fetchStores: PropTypes.func.isRequired
+        fetchStores: PropTypes.func.isRequired,
+        postalCode: PropTypes.string.isRequired,
+        storeList: PropTypes.object
     })
 };
 

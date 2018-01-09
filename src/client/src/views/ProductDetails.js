@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import ProductListContainer from './ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
@@ -12,5 +13,9 @@ function ProductDetails(props) {
         </ProductListContainer>
     );
 }
+
+ProductDetails.propTypes = {
+    match: PropTypes.object.isRequired
+};
 
 export default ProductDetails;

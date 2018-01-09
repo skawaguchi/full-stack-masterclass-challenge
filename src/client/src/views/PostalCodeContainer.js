@@ -23,7 +23,11 @@ class PostalCodeContainer extends Component {
 }
 
 PostalCodeContainer.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    storeListStore: PropTypes.shape({
+        fetchGeo: PropTypes.func.isRequired,
+        postalCode: PropTypes.string
+    })
 };
 
 export default PostalCodeContainer;

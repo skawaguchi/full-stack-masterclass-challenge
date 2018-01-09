@@ -23,7 +23,11 @@ class ProductListContainer extends Component {
 }
 
 ProductListContainer.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    productListStore: PropTypes.shape({
+        fetchProducts: PropTypes.func.isRequired,
+        productList: PropTypes.object
+    })
 };
 
 export default ProductListContainer;
