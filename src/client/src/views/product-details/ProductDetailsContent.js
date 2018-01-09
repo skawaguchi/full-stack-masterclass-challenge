@@ -78,8 +78,9 @@ class ProductDetailsContent extends Component {
 ProductDetailsContent.wrappedComponent.propTypes = {
     productId: PropTypes.string.isRequired,
     productListStore: PropTypes.shape({
+        displayedProductList: PropTypes.arrayOf(PropTypes.object),
         fetchProducts: PropTypes.func.isRequired,
-        displayedProductList: PropTypes.arrayOf(PropTypes.object)
+        getDisplayedProductDetails: PropTypes.func.isRequired
     })
 };
 

@@ -115,7 +115,18 @@ function StoreListTableRowItem(props) {
 
 StoreListTableRowItem.propTypes = {
     item: PropTypes.shape({
-        distance: PropTypes.number.isRequired
+        addressLine1: PropTypes.string.isRequired,
+        addressLine2: PropTypes.string,
+        city: PropTypes.string.isRequired,
+        distance: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
+        hasBeerColdRoom: PropTypes.bool.isRequired,
+        hasParking: PropTypes.bool.isRequired,
+        hasTransitAccess: PropTypes.bool.isRequired,
+        hasWheelchairAccess: PropTypes.bool.isRequired,
+        hours: PropTypes.object.isRequired,
+        quantity: PropTypes.number.isRequired,
+        telephone: PropTypes.string.isRequired
     }),
     postalCode: PropTypes.string.isRequired
 };
