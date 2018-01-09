@@ -2,6 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedNumber } from 'react-intl';
 
+import StoreHours from './StoreHours';
+
 function getAttribute(value) {
     return value !== null ? <div>{ value }</div> : null;
 }
@@ -43,7 +45,9 @@ function StoreListTableRowItem(props) {
                     <span className="store-value">{ props.item.id }</span>
                 </div>
             </td>
-            <td className="hours"></td>
+            <td className="hours">
+                <StoreHours hours={ props.item.hours }/>
+            </td>
             <td className="telephone">
                 { getAttribute(props.item.telephone) }
             </td>

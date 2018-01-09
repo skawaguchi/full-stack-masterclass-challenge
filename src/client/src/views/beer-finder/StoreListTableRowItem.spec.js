@@ -5,6 +5,8 @@ import { FormattedNumber } from 'react-intl';
 
 import StoreListTableRowItem from './StoreListTableRowItem';
 
+import StoreHours from './StoreHours';
+
 import { getAdaptedStore } from '../../mockUtils';
 
 const sandbox = sinon.sandbox.create();
@@ -65,8 +67,9 @@ describe('<StoreListTableRowItem/>', () => {
 
         it('should display the hours', () => {
             const container = component.find('td.hours');
+            const storeHours = container.find(StoreHours);
 
-            expect(container).toHaveLength(1);
+            expect(storeHours.props().hours).toEqual(props.hours);
         });
 
         it('should display the phone number', () => {
@@ -102,7 +105,6 @@ describe('<StoreListTableRowItem/>', () => {
             });
         });
     });
-
 
     describe('Given there is no address line 2', () => {
         it('should not display the line', () => {

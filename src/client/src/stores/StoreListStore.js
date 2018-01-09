@@ -39,13 +39,15 @@ class StoreListStore {
             postalCode: store.postal_code,
             quantity: store.quantity,
             telephone: store.telephone,
-            sunday: { close: store.sunday_close, open: store.sunday_open },
-            monday: { close: store.monday_close, open: store.monday_open },
-            tuesday: { close: store.tuesday_close, open: store.tuesday_open },
-            wednesday: { close: store.wednesday_close, open: store.wednesday_open },
-            thursday: { close: store.thursday_close, open: store.thursday_open },
-            friday: { close: store.friday_close, open: store.friday_open },
-            saturday: { close: store.saturday_close, open: store.saturday_open }
+            hours: {
+                sunday: { close: store.sunday_close, open: store.sunday_open },
+                monday: { close: store.monday_close, open: store.monday_open },
+                tuesday: { close: store.tuesday_close, open: store.tuesday_open },
+                wednesday: { close: store.wednesday_close, open: store.wednesday_open },
+                thursday: { close: store.thursday_close, open: store.thursday_open },
+                friday: { close: store.friday_close, open: store.friday_open },
+                saturday: { close: store.saturday_close, open: store.saturday_open }
+            }
         }));
     }
 

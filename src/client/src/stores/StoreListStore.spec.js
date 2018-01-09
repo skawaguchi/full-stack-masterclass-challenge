@@ -142,7 +142,7 @@ describe('StoreListStore', () => {
                 ];
 
                 expectedDays.forEach((day) => {
-                    expect(adaptedStore[day]).toEqual({
+                    expect(adaptedStore.hours[day]).toEqual({
                         close: originalStore[`${day}_close`],
                         open: originalStore[`${day}_open`]
                     });
