@@ -1,0 +1,13 @@
+{
+    "name": "full-stack-masterclass-challenge-server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "hapi": "17.2.0",
+        "inert": "5.0.1"
+    },
+    "scripts": {
+        "start": "node ."
+    }
+}
