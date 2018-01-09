@@ -35,6 +35,8 @@ describe('StoreListStore', () => {
         let getGeoStub;
         let adaptedStore;
         let originalStore;
+        let productId;
+        let postalCode;
 
         function setupStoreMock(overrides) {
             storeListMockData = overrides || [
@@ -53,18 +55,19 @@ describe('StoreListStore', () => {
 
         beforeEach(() => {
             getStoresStub = sandbox.stub(storesRepository, 'getStores');
+
             getGeoStub = sandbox.stub(geoRepository, 'getGeo');
         });
 
         describe('Given any store data', () => {
             beforeEach(() => {
+                productId = 'someId';
+                postalCode = 'some code';
+
                 setupStoreMock();
             });
 
             it('should fetch the stores', () => {
-                const productId = 'someId';
-                const postalCode = 'some code';
-
                 getStoresStub.returns(Promise.resolve({
                     data: {
                         result: [
@@ -81,8 +84,6 @@ describe('StoreListStore', () => {
 
             describe('when fetching the stores is successful', () => {
                 it('should update the store with the fetched stores', async () => {
-                    const productId = 'someId';
-                    const postalCode = 'some code';
                     const storeMock = getStore();
                     const expectedResults = {
                         data: {
@@ -166,65 +167,59 @@ describe('StoreListStore', () => {
             });
 
             describe('when changing the postal code', () => {
-                let productId;
-                let postalCode;
-
                 beforeEach(() => {
                     productId = 'someId';
                 });
 
+                function assertInvalidInput(input) {
+                    postalCode = input;
+
+                    store.refreshStores(productId, postalCode);
+                    expect(store.postalCode).toEqual(postalCode);
+                    expect(store.isValidPostalCode).toEqual(false);
+
+                    sinon.assert.notCalled(getStoresStub);
+                }
+
+                function assertValidInput(input) {
+                    getStoresStub.reset();
+
+                    postalCode = input;
+
+                    store.refreshStores(productId, postalCode);
+                    expect(store.postalCode).toEqual(postalCode);
+                    expect(store.isValidPostalCode).toEqual(true);
+
+                    sinon.assert.calledOnce(getStoresStub);
+                    sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
+                }
+
                 describe('and the input is not a valid postal code', () => {
                     it('should not call the store search with a breaking pattern', () => {
-                        postalCode = 'xxx';
-
-                        store.refreshStores(productId, postalCode);
-                        expect(store.postalCode).toEqual(postalCode);
-
-                        sinon.assert.notCalled(getStoresStub);
+                        assertInvalidInput('aaa');
                     });
 
                     it('should not call the store search with a partially matching pattern', () => {
-                        postalCode = 'a1a1';
-
-                        store.refreshStores(productId, postalCode);
-                        expect(store.postalCode).toEqual(postalCode);
-
-                        sinon.assert.notCalled(getStoresStub);
+                        assertInvalidInput('a1a1');
                     });
                 });
 
                 describe('and the input is longer than a valid postal code', () => {
                     it('should not call the store search', () => {
-                        postalCode = 'A1A 1A1A';
-
-                        store.refreshStores(productId, postalCode);
-                        expect(store.postalCode).toEqual(postalCode);
-
-                        sinon.assert.notCalled(getStoresStub);
+                        assertInvalidInput('A1A 1A1A');
                     });
                 });
 
                 describe('and the input is a valid full postal code', () => {
                     it('should call the store search', () => {
-                        postalCode = 'A1A1A1';
-
-                        store.refreshStores(productId, postalCode);
-                        expect(store.postalCode).toEqual(postalCode);
-
-                        sinon.assert.calledOnce(getStoresStub);
-                        sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
+                        assertValidInput('A1A1A1');
+                        assertValidInput('A1A 1A1');
                     });
                 });
 
                 describe('and the input is a valid abbreviated postal code', () => {
                     it('should call the store search', () => {
-                        postalCode = 'A1A';
-
-                        store.refreshStores(productId, postalCode);
-                        expect(store.postalCode).toEqual(postalCode);
-
-                        sinon.assert.calledOnce(getStoresStub);
-                        sinon.assert.calledWithExactly(getStoresStub, productId, postalCode);
+                        assertValidInput('A1A');
                     });
                 });
             });

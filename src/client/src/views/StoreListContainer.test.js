@@ -11,6 +11,8 @@ import { Stores } from '../stores/index';
 
 import { getMockReactClass } from '../mockUtils';
 
+import * as storeRepositories from '../repositories/Stores';
+
 const sandbox = sinon.sandbox.create();
 
 describe('<StoreListContainer/>', () => {
@@ -51,6 +53,8 @@ describe('<StoreListContainer/>', () => {
         productIdMock = 'someId';
 
         store.postalCode = postalCodeMock;
+
+        sandbox.stub(storeRepositories, 'getStores');
 
         sandbox.stub(store, 'fetchStores');
 

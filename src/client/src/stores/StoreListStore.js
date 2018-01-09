@@ -10,7 +10,7 @@ const postalCodeRegEx = /([A-Z]\d[A-Z] ?\d[A-Z]\d)|(^[A-Z]\d[A-Z]$)/;
 const maximumCharacterLength = 6;
 const whiteSpaceRegex = /\s/g;
 
-function isValidPostalCode(postalCode) {
+function testPostalCode(postalCode) {
     const upperCased = postalCode.toUpperCase();
     const noWhiteSpace = postalCode.replace(whiteSpaceRegex, '');
 
@@ -21,6 +21,7 @@ function isValidPostalCode(postalCode) {
 class StoreListStore {
     @observable storeList = null;
     @observable postalCode = null;
+    @observable isValidPostalCode = true;
 
     @action
     setStores(newStores) {
@@ -62,8 +63,9 @@ class StoreListStore {
     @action
     async refreshStores(productId, postalCode) {
         this.postalCode = postalCode;
+        this.isValidPostalCode = testPostalCode(postalCode);
 
-        if (isValidPostalCode(postalCode)) {
+        if (testPostalCode(postalCode)) {
             return this.fetchStores(productId, postalCode);
         }
 
@@ -75,6 +77,7 @@ class StoreListStore {
             const geo = await getGeo();
 
             this.postalCode = geo.data.zip_code;
+            this.isValidPostalCode = true;
         } catch (err) {
             throw new Error(err);
         }

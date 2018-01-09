@@ -18,6 +18,15 @@
 }
 
 .beer-finder .controls input {
+    border-width: 2px;
     font-size: 1rem;
     margin-left: 10px;
+}
+
+.beer-finder .controls input.invalid {
+    border-color: #f00;
+}
+
+.beer-finder .controls input::placeholder {
+    color: #ccc;
 }

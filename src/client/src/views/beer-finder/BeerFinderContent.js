@@ -23,6 +23,7 @@ function getPostalCodeChangeHandler(props) {
 class BeerFinderContent extends Component {
     render() {
         const productName = this.props.productListStore.getProductName(this.props.productId);
+        const invalidClass = this.props.storeListStore.isValidPostalCode ? '' : 'invalid';
 
         return (
             <section className="beer-finder">
@@ -38,6 +39,7 @@ class BeerFinderContent extends Component {
                 <div className="controls">
                     <span className="search-label">{ 'Search by Postal Code' }</span>
                     <input
+                        className={ invalidClass }
                         onChange={ getPostalCodeChangeHandler(this.props) }
                         placeholder="A1A 2B2 or A1A"
                         type="text"
@@ -68,6 +70,7 @@ BeerFinderContent.wrappedComponent.propTypes = {
         getProductName: PropTypes.func.isRequired
     }),
     storeListStore: PropTypes.shape({
+        isValidPostalCode: PropTypes.bool.isRequired,
         postalCode: PropTypes.string.isRequired,
         refreshStores: PropTypes.func.isRequired,
         storeList: MobXPropTypes.arrayOrObservableArray.isRequired

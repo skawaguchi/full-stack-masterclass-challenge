@@ -26,15 +26,16 @@ describe('<BeerFinderContent/>', () => {
     let productStoreMock;
     let storeStoreMock;
 
-    function renderWrappedComponent() {
-
+    function renderWrappedComponent(storeOverrides) {
         productStoreMock = {
             getProductName: sandbox.stub()
         };
         storeStoreMock = {
+            isValidPostalCode: false,
             postalCode: postalCodeMock,
             refreshStores: sandbox.stub(),
-            storeList: sortedStoreList
+            storeList: sortedStoreList,
+            ...storeOverrides
         };
 
         productStoreMock.getProductName.returns(productMock.name);
@@ -159,6 +160,34 @@ describe('<BeerFinderContent/>', () => {
                 sinon.assert.calledOnce(storeStoreMock.refreshStores);
                 sinon.assert.calledWithExactly(storeStoreMock.refreshStores, productMock.id, changedPostalCode);
             });
+        });
+    });
+
+    describe('Given the postal code is invalid', () => {
+        it('should highlight the input as invalid', () => {
+            setupMockStore();
+
+            renderWrappedComponent({
+                isValidPostalCode: false
+            });
+
+            const input = component.find('div.controls input');
+
+            expect(input.hasClass('invalid')).toBe(true);
+        });
+    });
+
+    describe('Given the postal code is valid', () => {
+        it('should highlight the input as invalid', () => {
+            setupMockStore();
+
+            renderWrappedComponent({
+                isValidPostalCode: true
+            });
+
+            const input = component.find('div.controls input');
+
+            expect(input.hasClass('invalid')).toBe(false);
         });
     });
 });
