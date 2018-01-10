@@ -9,6 +9,7 @@
 .product-list-item img {
     display: block;
     max-width: 120px;
+    mix-blend-mode: multiply;
 }
 
 .product-list-item .product-image-container {
@@ -27,13 +28,15 @@
 }
 
 .product-list-item .product-link .suggestion {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #000;
     color: #000;
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     margin: auto;
     opacity: 0;
+    padding: 0 10px;
     position: relative;
     text-align: center;
-    text-transform: uppercase;
     top: 20px;
     white-space: nowrap;
 }
@@ -81,7 +84,6 @@
 }
 
 .product-list-item .product-link:hover .suggestion-wrapper {
-    background: rgba(255, 255, 255, 0.75);
 }
 
 .product-list-item .product-link:hover .suggestion {
