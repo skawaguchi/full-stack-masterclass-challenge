@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import ProductList from './ProductList';
 import ProductListItem from './ProductListItem';
 
-import { getProductListItem } from '../mockUtils';
+import { getProductListItem } from '../../mockUtils';
 
 describe('<ProductList/>', () => {
     let component;

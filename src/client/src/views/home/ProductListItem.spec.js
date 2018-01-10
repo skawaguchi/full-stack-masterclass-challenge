@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 import ProductListItem from './ProductListItem';
 
-import ProductImage from '../components/ProductImage';
-import BeerFinderLink from '../components/BeerFinderLink';
+import ProductImage from '../../components/ProductImage';
+import BeerFinderLink from '../../components/BeerFinderLink';
 
 describe('<ProductListItem/>', () => {
     let component;

@@ -2,8 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import ProductImage from '../components/ProductImage';
-import BeerFinderLink from '../components/BeerFinderLink';
+import ProductImage from '../../components/ProductImage';
+import BeerFinderLink from '../../components/BeerFinderLink';
 
 import './ProductListItem.css';
 

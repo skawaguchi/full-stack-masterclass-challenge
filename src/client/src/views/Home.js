@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import ProductListContainer from './ProductListContainer';
 import AppHeader from './AppHeader';
-import ProductList from './ProductList';
+import ProductList from './home/ProductList';
 
 import './Home.css';
 
