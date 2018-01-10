@@ -20,9 +20,9 @@
 }
 
 .product-details .product-image {
-    max-height: 400px;
-    max-width: 300px;
+    height: 400px;
     mix-blend-mode: multiply;
+    width: 300px;
 }
 
 .product-details dt::after {
