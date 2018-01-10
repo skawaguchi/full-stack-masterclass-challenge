@@ -37,6 +37,7 @@ describe('StoreListStore', () => {
         let originalStore;
         let productId;
         let postalCode;
+        let consoleStub;
 
         function setupStoreMock(overrides) {
             storeListMockData = overrides || [
@@ -55,8 +56,8 @@ describe('StoreListStore', () => {
 
         beforeEach(() => {
             getStoresStub = sandbox.stub(storesRepository, 'getStores');
-
             getGeoStub = sandbox.stub(geoRepository, 'getGeo');
+            consoleStub = sandbox.stub(console, 'error');
         });
 
         describe('Given any store data', () => {
@@ -150,9 +151,7 @@ describe('StoreListStore', () => {
             });
 
             describe('when fetching the stores fails', () => {
-                it('should throw an error', async () => {
-                    expect.assertions(1);
-
+                it('should log an error to the console and set the list of stores to be empty', async () => {
                     const expectedError = 'some error';
 
                     getStoresStub
@@ -161,7 +160,8 @@ describe('StoreListStore', () => {
                     try {
                         await store.fetchStores();
                     } catch (err) {
-                        expect(err).toEqual(new Error(expectedError));
+                        sinon.assert.calledOnce(consoleStub);
+                        expect(store.storeList).toHaveLength(0);
                     }
                 });
             });
@@ -243,9 +243,7 @@ describe('StoreListStore', () => {
         });
 
         describe('When fetching the postal code fails', () => {
-            it('should throw an error', async () => {
-                expect.assertions(1);
-
+            it('should log an error to the console and set the postal code to blank', async () => {
                 const expectedError = 'some error';
 
                 getGeoStub
@@ -254,7 +252,8 @@ describe('StoreListStore', () => {
                 try {
                     await store.fetchGeo();
                 } catch (err) {
-                    expect(err).toEqual(new Error(expectedError));
+                    sinon.assert.calledOnce(consoleStub);
+                    expect(store.postalCode).toEqual('');
                 }
             });
         });

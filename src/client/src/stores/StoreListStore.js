@@ -58,7 +58,8 @@ class StoreListStore {
 
             this.setStores(stores.data.result);
         } catch (err) {
-            throw new Error(err);
+            this.setStores([]);
+            console.error(err);
         }
     }
 
@@ -81,7 +82,8 @@ class StoreListStore {
             this.postalCode = geo.data.zip_code;
             this.isValidPostalCode = true;
         } catch (err) {
-            throw new Error(err);
+            console.error(err);
+            this.postalCode = [];
         }
     }
 }
