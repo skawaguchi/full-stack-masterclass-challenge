@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { inject, observer } from 'mobx-react';
 
-import ProductListContainer from './ProductListContainer';
+import ProductListContainer from '../containers/ProductListContainer';
 import AppHeader from './AppHeader';
 import ProductList from './home/ProductList';
 

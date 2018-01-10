@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import ProductListContainer from './ProductListContainer';
+import ProductListContainer from '../containers/ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 function ProductDetails(props) {

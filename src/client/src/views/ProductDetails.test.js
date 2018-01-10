@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import ProductDetails from './ProductDetails';
 
-import ProductListContainer from './ProductListContainer';
+import ProductListContainer from '../containers/ProductListContainer';
 import ProductDetailsContent from './product-details/ProductDetailsContent';
 
 describe('<ProductDetails/>', () => {

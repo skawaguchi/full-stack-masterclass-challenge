@@ -1,9 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import ProductListContainer from './ProductListContainer';
-import StoreListContainer from './StoreListContainer';
-import PostalCodeContainer from './PostalCodeContainer';
+import ProductListContainer from '../containers/ProductListContainer';
+import StoreListContainer from '../containers/StoreListContainer';
+import PostalCodeContainer from '../containers/PostalCodeContainer';
 import BeerFinderContent from './beer-finder/BeerFinderContent';
 
 function BeerFinder(props) {

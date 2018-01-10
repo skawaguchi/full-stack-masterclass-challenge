@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import Home from './Home';
 
-import ProductListContainer from './ProductListContainer';
+import ProductListContainer from '../containers/ProductListContainer';
 import AppHeader from './AppHeader';
 import ProductList from './home/ProductList';
 
