@@ -1,3 +1,24 @@
+.beer-finder-link {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+}
+
 .beer-finder-link svg path {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    fill: #a4babb;
+}
+
+.beer-finder-link:hover svg path {
     fill: #000;
+}
+
+.beer-finder-link:hover {
+    -webkit-transform: scale3d(1.2, 1.2, 1);
+    transform: scale3d(1.2, 1.2, 1);
 }

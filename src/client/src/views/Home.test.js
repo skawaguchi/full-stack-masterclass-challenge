@@ -31,9 +31,8 @@ describe('<Home/>', () => {
         });
 
         it('should have a containing element that is uniquely identifiable', () => {
-            const container = component.childAt(0);
+            const container = component.find('section.home');
 
-            expect(container.type()).toEqual('section');
             expect(container.hasClass('home')).toBe(true);
         });
 

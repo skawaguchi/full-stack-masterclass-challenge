@@ -6,14 +6,16 @@ import ProductListContainer from './ProductListContainer';
 import AppHeader from './AppHeader';
 import ProductList from './ProductList';
 
+import './Home.css';
+
 @inject('productListStore')
 @observer
 class Home extends Component {
     render() {
         return (
             <ProductListContainer>
+                <AppHeader/>
                 <section className="home">
-                    <AppHeader/>
                     <ProductList
                         productListItems={this.props.productListStore.displayedProductList}
                     />

@@ -5,15 +5,27 @@ import { Link } from 'react-router-dom';
 import ProductImage from '../components/ProductImage';
 import BeerFinderLink from '../components/BeerFinderLink';
 
+import './ProductListItem.css';
+
 function ProductListItem(props) {
     return (
         <div className="product-list-item">
-            <ProductImage
-                altText={ props.name }
-                imagePath={ props.imagePath}
-            />
-            <Link to={ `/product/${props.id}` }>
-                { props.name }
+            <Link
+                className="product-link"
+                to={ `/product/${props.id}` }
+            >
+                <div className="product-image-container">
+                    <ProductImage
+                        altText={ props.name }
+                        imagePath={ props.imagePath}
+                    />
+                    <div className="suggestion-wrapper">
+                        <div className="suggestion">
+                            {'Get Details'}
+                        </div>
+                    </div>
+                </div>
+                <span className="product-name">{ props.name }</span>
             </Link>
             <BeerFinderLink id={ props.id }/>
         </div>
