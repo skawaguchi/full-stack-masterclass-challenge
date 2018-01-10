@@ -4,6 +4,7 @@ import { inject, observer, PropTypes as MobXPropTypes } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
+import { DebounceInput } from 'react-debounce-input';
 
 import CloseLink from '../../components/CloseLink';
 import StoreListTable from './StoreListTable';
@@ -38,7 +39,7 @@ class BeerFinderContent extends Component {
                 </h1>
                 <div className="controls">
                     <span className="search-label">{ 'Search by Postal Code' }</span>
-                    <input
+                    <DebounceInput
                         className={ invalidClass }
                         onChange={ getPostalCodeChangeHandler(this.props) }
                         placeholder="A1A 2B2 or A1A"

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import sinon from 'sinon';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/fontawesome-free-solid';
+import { DebounceInput } from 'react-debounce-input';
 
 import BeerFinderContent from './BeerFinderContent';
 
@@ -136,7 +137,7 @@ describe('<BeerFinderContent/>', () => {
         it('should have a controls container with the postal code input', () => {
             const controls = component.find('div.controls');
             const label = controls.find('span');
-            const input = controls.find('input');
+            const input = controls.find(DebounceInput);
 
             expect(controls).toHaveLength(1);
             expect(label.text()).toEqual('Search by Postal Code');
@@ -147,7 +148,7 @@ describe('<BeerFinderContent/>', () => {
 
         describe('when the postal code is changed', () => {
             it('should query the stores again', () => {
-                const input = component.find('div.controls input');
+                const input = component.find(DebounceInput);
                 const changedPostalCode = 'some change';
                 const event = {
                     target: {
@@ -171,7 +172,7 @@ describe('<BeerFinderContent/>', () => {
                 isValidPostalCode: false
             });
 
-            const input = component.find('div.controls input');
+            const input = component.find(DebounceInput);
 
             expect(input.hasClass('invalid')).toBe(true);
         });
@@ -185,7 +186,7 @@ describe('<BeerFinderContent/>', () => {
                 isValidPostalCode: true
             });
 
-            const input = component.find('div.controls input');
+            const input = component.find(DebounceInput);
 
             expect(input.hasClass('invalid')).toBe(false);
         });
