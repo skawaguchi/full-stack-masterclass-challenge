@@ -21,21 +21,7 @@
 }
 
 .home .beer-finder-link {
-    margin-left: 5px;
-    white-space: nowrap;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
-
-.home .beer-finder-link::after {
-    -webkit-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
-    color: #a4babb;
-    content: "Beer Finder";
-    font-size: 0.5rem;
-    padding-left: 5px;
-    text-transform: uppercase;
-}
-
-.home .beer-finder-link:hover::after {
-    color: #000;
-}
-
