@@ -29,7 +29,10 @@ class BeerFinderContent extends Component {
         return (
             <section className="beer-finder">
                 <CloseLink/>
-                <Link to={`/product/${this.props.productId}`}>
+                <Link
+                    className="back-link"
+                    to={`/product/${this.props.productId}`}
+                >
                     <FontAwesomeIcon icon={ faArrowLeft }/>
                     <span className="back-label">{ 'Back to Product Details' }</span>
                 </Link>
@@ -54,9 +57,12 @@ class BeerFinderContent extends Component {
                             storeList={ this.props.storeListStore.storeList }
                         /> :
                         <div className="no-stores-message">
-                            {
-                                'Oh noes! We couldn\'t find a store with this beer!'
-                            }
+                            <img
+                                alt="Don't cry over spilt beer"
+                                src="/spilled-beer.png"
+                            />
+                            <p>{ `Oh noes! We couldn't find a store with this beer!
+                            Please try a different postal code.` }</p>
                         </div>
                 }
 

@@ -1,13 +1,16 @@
-.beer-finder .search-label {
+.beer-finder {
+    padding: 20px;
+}
+
+.beer-finder h1 .search-label {
     color: #ccc;
-    padding-left: 10px;
 }
 
 .beer-finder .product-name {
+    color: #542b1d;
     padding-left: 10px;
 }
 
-.beer-finder .back-label,
 .beer-finder .store-value {
     padding-left: 5px;
 }
@@ -19,7 +22,7 @@
 
 .beer-finder .controls input {
     border-width: 2px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-left: 10px;
 }
 
@@ -29,4 +32,128 @@
 
 .beer-finder .controls input::placeholder {
     color: #ccc;
+}
+
+.beer-finder .back-link .back-label {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    color: #a4babb;
+    padding-left: 5px;
+}
+
+.beer-finder .back-link svg path {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    fill: #a4babb;
+}
+
+.beer-finder .back-link:hover .back-label {
+    color: #000;
+}
+
+.beer-finder .back-link:hover svg path {
+    fill: #000;
+    margin-left: -5px;
+}
+
+.beer-finder .store-list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.beer-finder thead {
+    color: #fff;
+    background-color: #542b1d;
+}
+
+.beer-finder .store-hours {
+    -webkit-marging-before: 0;
+}
+
+.beer-finder .store-hours dt {
+    font-size: 0.65rem;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    text-transform: uppercase;
+    width: 29%;
+}
+
+.beer-finder .store-hours dd {
+    float: left;
+    margin-left: 3%;
+    white-space: nowrap;
+    width: 67%;
+}
+
+.beer-finder .telephone {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.beer-finder .distance,
+.beer-finder .quantity,
+.beer-finder .directions {
+    text-align: center;
+}
+
+.beer-finder .store-info {
+    text-align: center;
+}
+
+.beer-finder .store-info .icons {
+    display: flex;
+    justify-content: center;
+}
+
+.beer-finder .store-info .icons span {
+    width: 20px;
+}
+
+.beer-finder .store-list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.beer-finder .store-list td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.beer-finder .directions button {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    background-color: #a4babb;
+    border-width: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.beer-finder .directions button:hover {
+    background-color: #542b1d;
+}
+
+.beer-finder .controls {
+    font-size: 1.2rem;
+    padding-bottom: 20px;
+}
+
+.beer-finder .no-stores-message {
+    align-items: center;
+    display: flex;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 2rem;
+    height: 50vh;
+    justify-content: center;
+}
+
+.beer-finder .no-stores-message p {
+    line-height: 2.4rem;
+    width: 320px;
+}
+
+.beer-finder .no-stores-message img {
+    height: 200px;
 }
