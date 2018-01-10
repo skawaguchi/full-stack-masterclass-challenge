@@ -11,7 +11,9 @@ function CloseLink() {
             className='close-link'
             to={ '/' }
         >
-            <FontAwesomeIcon icon={ faTimes }/>
+            <div className='icon-container'>
+                <FontAwesomeIcon icon={ faTimes }/>
+            </div>
         </Link>
     );
 }

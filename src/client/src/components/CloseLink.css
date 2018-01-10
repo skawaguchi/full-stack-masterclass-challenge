@@ -1,9 +1,22 @@
 .close-link {
+    align-items: center;
+    display: flex;
     height: 40px;
+    justify-content: center;
     position: absolute;
     right: 20px;
     top: 20px;
     width: 40px;
+}
+
+.close-link .icon-container {
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+
+.close-link:hover .icon-container {
+    -webkit-transform: scale3d(1.2, 1.2, 1);
+    transform: scale3d(1.2, 1.2, 1);
 }
 
 .close-link svg.svg-inline--fa.fa-w-12 {
