@@ -98,31 +98,31 @@ export function getAdaptedHours(overrides) {
     return {
         sunday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         monday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         tuesday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         wednesday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         thursday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         friday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         saturday: {
             close: chance.natural({ min: 0, max: 1440}),
-                open: chance.natural({ min: 0, max: 1440})
+            open: chance.natural({ min: 0, max: 1440})
         },
         ...overrides
     };
