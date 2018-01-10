@@ -5,9 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "hapi": "17.2.0",
-        "inert": "5.0.1"
-    },
-    "scripts": {
-        "start": "node ."
+        "inert": "5.0.1",
+        "openurl": "1.1.1"
     }
 }
