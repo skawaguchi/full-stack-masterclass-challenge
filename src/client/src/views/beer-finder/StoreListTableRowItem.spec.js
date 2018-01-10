@@ -73,10 +73,10 @@ describe('<StoreListTableRowItem/>', () => {
         });
 
         it('should display the hours', () => {
-            const container = component.find('td.hours');
+            const container = component.find('td.store-hours');
             const storeHours = container.find(StoreHours);
 
-            expect(storeHours.props().hours).toEqual(props.hours);
+            expect(storeHours.props().storeHours).toEqual(props.item.storeHours);
         });
 
         it('should display the phone number', () => {

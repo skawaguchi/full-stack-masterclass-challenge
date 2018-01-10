@@ -39,7 +39,7 @@ class StoreListStore {
             postalCode: store.postal_code,
             quantity: store.quantity,
             telephone: store.telephone,
-            hours: {
+            storeHours: {
                 sunday: { close: store.sunday_close, open: store.sunday_open },
                 monday: { close: store.monday_close, open: store.monday_open },
                 tuesday: { close: store.tuesday_close, open: store.tuesday_open },

@@ -61,7 +61,7 @@ function StoreHours(props) {
         thursday,
         friday,
         saturday
-    } = getDisplayedHours(props.hours);
+    } = getDisplayedHours(props.storeHours);
 
     return (
         <dl className="store-hours">
@@ -77,7 +77,7 @@ function StoreHours(props) {
 }
 
 StoreHours.propTypes = {
-    hours: PropTypes.shape({
+    storeHours: PropTypes.shape({
         sunday: PropTypes.object.isRequired,
         monday: PropTypes.object.isRequired,
         tuesday: PropTypes.object.isRequired,

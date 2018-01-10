@@ -11,7 +11,7 @@ describe('<StoreHours/>', () => {
 
     function renderComponent() {
         props = Object.freeze({
-            hours: getAdaptedHours({
+            storeHours: getAdaptedHours({
                 sunday: {
                     close: 320,
                     open: 100

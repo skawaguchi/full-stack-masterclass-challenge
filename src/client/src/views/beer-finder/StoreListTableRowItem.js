@@ -100,8 +100,8 @@ function StoreListTableRowItem(props) {
                     { getIcon(props.item.hasBeerColdRoom, 'beerColdRoom') }
                 </div>
             </td>
-            <td className="hours">
-                <StoreHours hours={ props.item.hours }/>
+            <td className="store-hours">
+                <StoreHours storeHours={ props.item.storeHours }/>
             </td>
             <td className="telephone">
                 { getAttribute(props.item.telephone) }
@@ -124,8 +124,8 @@ StoreListTableRowItem.propTypes = {
         hasParking: PropTypes.bool.isRequired,
         hasTransitAccess: PropTypes.bool.isRequired,
         hasWheelchairAccess: PropTypes.bool.isRequired,
-        hours: PropTypes.object.isRequired,
         quantity: PropTypes.number.isRequired,
+        storeHours: PropTypes.object.isRequired,
         telephone: PropTypes.string.isRequired
     }),
     postalCode: PropTypes.string.isRequired
