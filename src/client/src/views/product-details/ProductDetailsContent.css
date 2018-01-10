@@ -21,6 +21,8 @@
 
 .product-details .product-image {
     height: 400px;
+    min-height: 400px;
+    min-width: 300px;
     mix-blend-mode: multiply;
     width: 300px;
 }
