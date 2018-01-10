@@ -8,6 +8,7 @@
     "author": "Stephen Kawaguchi <stephen.kawaguchi@gmail.com>",
     "license": "MIT",
     "scripts": {
+        "install": "cd src/server && yarn",
         "start": "node ./src/server/open && node ./src/server"
     },
     "private": true
