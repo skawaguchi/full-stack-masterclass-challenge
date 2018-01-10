@@ -7,7 +7,7 @@ import AppProvider from './AppProvider';
 import ProductListProvider from './ProductListProvider';
 import StoreListProvider from './StoreListProvider';
 
-import App from './App';
+import App from '../views/App';
 
 describe('<AppProvider/>', () => {
     let component;
