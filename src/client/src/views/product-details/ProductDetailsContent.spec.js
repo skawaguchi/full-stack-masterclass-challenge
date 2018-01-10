@@ -105,10 +105,8 @@ describe('<ProductDetailsContent/>', () => {
 
             it('should have a link to the beer finder', () => {
                 const container = component.find('div.beer-finder');
-                const label = container.find('dt');
                 const link = container.find(BeerFinderLink);
 
-                expect(label.text()).toEqual('Beer Finder');
                 expect(link.props().id).toEqual(productMock.id);
             });
         });

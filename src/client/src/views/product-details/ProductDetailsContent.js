@@ -46,11 +46,10 @@ class ProductDetailsContent extends Component {
                     altText={ product.name }
                     imagePath={ product.imagePath }
                 />
-                <h1>{ product.name }</h1>
                 <dl className="product-details-content">
+                    <h1>{ product.name }</h1>
                     <div className="beer-finder">
-                        <dt>{ 'Beer Finder' }</dt>
-                        <dd><BeerFinderLink id={ product.id }/></dd>
+                        <BeerFinderLink id={ product.id }/>
                     </div>
                     <div className="product-id">
                         <dt>{ 'Product ID' }</dt>

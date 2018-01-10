@@ -1,7 +1,63 @@
+.product-details {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.product-details h1 {
+    color: #542b1d;
+    margin-bottom: 10px;
+}
+
+.product-details .image-error {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    height: 400px;
+    justify-content: center;
+    text-transform: uppercase;
+    width: 300px;
+}
+
 .product-details .product-image {
+    max-height: 400px;
     max-width: 300px;
+    mix-blend-mode: multiply;
 }
 
 .product-details dt::after {
     content: ":";
 }
+
+.product-details .beer-finder-link {
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.product-details .beer-finder-link::after {
+    font-size: 0.75rem;
+}
+
+.product-details .product-id,
+.product-details .price,
+.product-details .tasting-note,
+.product-details .varietal,
+.product-details .style {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.product-details dt {
+    font-weight: bold;
+    padding-right: 5%;
+    white-space: nowrap;
+    width: 20%;
+}
+
+.product-details dd {
+    margin-left: auto;
+    width: 75%;
+}
+
