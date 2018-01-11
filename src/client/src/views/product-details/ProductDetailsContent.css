@@ -49,20 +49,19 @@
 .product-details .varietal,
 .product-details .style {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: 10px;
 }
 
 .product-details dt {
+    flex: 0 0 100px;
     font-weight: bold;
     padding-right: 5%;
-    white-space: nowrap;
-    width: 20%;
 }
 
 .product-details dd {
+    flex: 1;
     margin-left: auto;
-    width: 75%;
 }
 
 .product-details .beer-finder-container {
