@@ -7,7 +7,7 @@ import App from './App';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
 import BeerFinder from './BeerFinder';
-import NotFound from './NotFound';
+import Error from './Error';
 
 describe('<App/>', () => {
     let component;
@@ -72,7 +72,7 @@ describe('<App/>', () => {
 
                 expect(notMatchingRoute.type()).toEqual(Route);
                 expect(notMatchingRoute.props().path).toEqual('*');
-                expect(notMatchingRoute.props().component).toEqual(NotFound);
+                expect(notMatchingRoute.props().component).toEqual(Error);
             });
         });
     });

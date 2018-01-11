@@ -21,7 +21,19 @@ describe('<Error/>', () => {
 
     it('should be a section', () => {
         expect(component.type()).toEqual('section');
-        expect(component.hasClass('error')).toBe(true);
+        expect(component.hasClass('error-view')).toBe(true);
+    });
+
+    it('should have an error image', () => {
+        const image = component.find('img');
+
+        expect(image).toHaveLength(1);
+    });
+
+    it('should have an error message', () => {
+        const image = component.find('p');
+
+        expect(image).toHaveLength(1);
     });
 });
 

@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import ProductDetails from './ProductDetails';
 import BeerFinder from './BeerFinder';
-import NotFound from './NotFound';
+import Error from './Error';
 
 import './App.css';
 
@@ -29,7 +29,7 @@ function App() {
                     path="/product/:productId/beer-finder"
                 />
                 <Route
-                    component={ NotFound }
+                    component={ Error }
                     path="*"
                 />
             </Switch>

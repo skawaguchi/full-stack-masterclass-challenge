@@ -1,0 +1,14 @@
+.error-view {
+    align-items: top;
+    display: flex;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 2rem;
+    justify-content: center;
+}
+
+.error-view p {
+    align-items: center;
+    display: flex;
+    line-height: 2.4rem;
+    width: 320px;
+}
