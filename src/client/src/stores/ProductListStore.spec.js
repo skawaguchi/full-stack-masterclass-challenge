@@ -1,20 +1,31 @@
 import sinon from 'sinon';
 
-import ProductListStore from './ProductListStore';
-
 import { getAdaptedProduct, getProduct } from '../mockUtils';
 import * as productRepository from '../repositories/Products';
+
+import ProductListStore from './ProductListStore';
+
+import { Stores } from './index';
+
+jest.mock('./index');
 
 const sandbox = sinon.sandbox.create();
 
 describe('ProductListStore', () => {
     let store;
+    let getProductsStub;
+    let consoleStub;
 
     function makeStore() {
         store = new ProductListStore();
     }
 
     beforeEach(() => {
+        getProductsStub = sandbox.stub(productRepository, 'getProducts');
+        consoleStub = sandbox.stub(console, 'error');
+
+        Stores.uiStore.pushLocation.mockImplementation(() => sandbox.stub());
+
         makeStore();
     });
 
@@ -30,13 +41,10 @@ describe('ProductListStore', () => {
 
     describe('Fetching and adapting data', () => {
         let productListMockData;
-        let getProductsStub;
         let adaptedProduct;
         let originalProduct;
 
         beforeEach(() => {
-            getProductsStub = sandbox.stub(productRepository, 'getProducts');
-
             productListMockData = [
                 getProduct()
             ];
@@ -111,19 +119,20 @@ describe('ProductListStore', () => {
         });
 
         describe('When fetching the products fails', () => {
-            it('should throw an error', async () => {
-                expect.assertions(1);
-
+            it('should log the error and go to the error page', async () => {
                 const expectedError = 'some error';
 
-                getProductsStub
-                    .returns(Promise.reject(expectedError));
+                getProductsStub.returns(Promise.reject(expectedError));
 
-                try {
-                    await store.fetchProducts();
-                } catch (err) {
-                    expect(err).toEqual(new Error(expectedError));
-                }
+                await store.fetchProducts();
+
+                const expectedLocation = {
+                    pathname: '/error'
+                };
+
+                expect(Stores.uiStore.pushLocation).toBeCalledWith(expectedLocation);
+
+                sinon.assert.calledOnce(consoleStub);
             });
         });
     });
@@ -132,8 +141,6 @@ describe('ProductListStore', () => {
         let productListMockData;
 
         beforeEach(() => {
-            sandbox.stub(productRepository, 'getProducts');
-
             productListMockData = [
                 getAdaptedProduct(),
                 getAdaptedProduct(),

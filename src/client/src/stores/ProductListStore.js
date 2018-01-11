@@ -5,6 +5,7 @@ import {
 } from 'mobx';
 
 import { getProducts } from '../repositories/Products';
+import { Stores } from './index';
 
 class ProductListStore {
     @observable productList = [];
@@ -70,7 +71,13 @@ class ProductListStore {
 
             this.setProducts(products.data.result);
         } catch (err) {
-            throw new Error(err);
+            const newLocation = {
+                pathname: '/error'
+            };
+
+            Stores.uiStore.pushLocation(newLocation);
+
+            console.error(err);
         }
     }
 }
