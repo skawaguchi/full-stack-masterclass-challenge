@@ -3,7 +3,7 @@
 }
 
 .beer-finder h1 .search-label {
-    color: #ccc;
+    color: #C79F7A;
 }
 
 .beer-finder .product-name {
@@ -21,7 +21,9 @@
 }
 
 .beer-finder .controls input {
-    border-width: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-width: 1px;
+    border-style: solid;
     font-size: 1.2rem;
     margin-left: 10px;
 }
@@ -150,6 +152,7 @@
 }
 
 .beer-finder .no-stores-message p {
+    color: #542b1d;
     line-height: 2.4rem;
     width: 320px;
 }

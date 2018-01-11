@@ -8,6 +8,7 @@
 
 .error-view p {
     align-items: center;
+    color: #542b1d;
     display: flex;
     line-height: 2.4rem;
     width: 320px;

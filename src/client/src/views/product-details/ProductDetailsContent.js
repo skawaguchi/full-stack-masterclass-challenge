@@ -48,7 +48,7 @@ class ProductDetailsContent extends Component {
                 />
                 <dl className="product-details-content">
                     <h1>{ product.name }</h1>
-                    <div className="beer-finder">
+                    <div className="beer-finder-container">
                         <BeerFinderLink id={ product.id }/>
                     </div>
                     <div className="product-id">
