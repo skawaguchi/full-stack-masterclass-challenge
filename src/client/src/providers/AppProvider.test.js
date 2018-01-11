@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
 import AppProvider from './AppProvider';
@@ -27,8 +27,8 @@ describe('<AppProvider/>', () => {
         renderComponent();
     });
 
-    it('should be a browser router', () => {
-        const browserRouter = component.find(BrowserRouter);
+    it('should be a hash router', () => {
+        const browserRouter = component.find(HashRouter);
 
         expect(browserRouter).toHaveLength(1);
     });

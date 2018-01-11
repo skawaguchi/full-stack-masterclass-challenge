@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
 import App from '../views/App';
@@ -12,7 +12,7 @@ import { HistoryStoreProviderWithRouter } from './HistoryStoreProvider';
 function RouterProvider() {
     return (
         <IntlProvider locale="en">
-            <BrowserRouter>
+            <HashRouter>
                 <ProductListProvider>
                     <StoreListProvider>
                         <UIProvider>
@@ -22,7 +22,7 @@ function RouterProvider() {
                         </UIProvider>
                     </StoreListProvider>
                 </ProductListProvider>
-            </BrowserRouter>
+            </HashRouter>
         </IntlProvider>
 
     );
