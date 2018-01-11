@@ -6,6 +6,8 @@ import { IntlProvider } from 'react-intl';
 import AppProvider from './AppProvider';
 import ProductListProvider from './ProductListProvider';
 import StoreListProvider from './StoreListProvider';
+import UIProvider from './UIProvider';
+import { HistoryStoreProviderWithRouter } from './HistoryStoreProvider';
 
 import App from '../views/App';
 
@@ -45,6 +47,18 @@ describe('<AppProvider/>', () => {
 
     it('should have a provider for the store list', () => {
         const provider = component.find(StoreListProvider);
+
+        expect(provider).toHaveLength(1);
+    });
+
+    it('should have a provider for the ui', () => {
+        const provider = component.find(UIProvider);
+
+        expect(provider).toHaveLength(1);
+    });
+
+    it('should have a provider for the history store with the router', () => {
+        const provider = component.find(HistoryStoreProviderWithRouter);
 
         expect(provider).toHaveLength(1);
     });
