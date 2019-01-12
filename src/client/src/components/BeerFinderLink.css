@@ -9,7 +9,7 @@
 .beer-finder-link svg path {
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
-    fill: #a4babb;
+    fill: #bb9b7a;
 }
 
 .beer-finder-link:hover svg path {
@@ -24,7 +24,7 @@
 .beer-finder-link::after {
     -webkit-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;
-    color: #a4babb;
+    color: #bb9b7a;
     content: "Beer Finder";
     font-size: 0.75rem;
     padding-left: 5px;
@@ -34,4 +34,3 @@
 .beer-finder-link:hover::after {
     color: #000;
 }
-
